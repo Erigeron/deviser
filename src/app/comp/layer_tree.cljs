@@ -13,7 +13,7 @@
      (div
       {:style (merge
                style/button
-               {:background-color (case kind :layout (hsl 240 80 90) (hsl 0 0 50)),
+               {:background-color (case kind :box (hsl 240 80 90) (hsl 0 0 50)),
                 :padding "0 8px",
                 :margin "1px 2px"}),
        :on-click (fn [e d! m!] (d! :focus path))}

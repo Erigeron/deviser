@@ -10,4 +10,7 @@
     :element/after (element/after-item store op-data)
     :element/before (element/before-item store op-data)
     :element/remove (element/remove-item store op-data)
+    :element/set-kind (element/set-kind store op-data)
+    :element/layout (element/set-layout store op-data)
+    :element/content (element/set-content store op-data)
     store))

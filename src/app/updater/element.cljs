@@ -9,7 +9,7 @@
         focus (:focus store)
         target-node (get-in tree (wrap-path focus))
         new-id (key-append (:children target-node))
-        new-element (merge schema/element {:kind :layout})]
+        new-element schema/element]
     (-> store
         (update-in
          (cons :tree (wrap-path focus))
@@ -21,7 +21,7 @@
         focus (:focus store)
         target-node (get-in tree (wrap-path focus))
         new-id (key-prepend (:children target-node))
-        new-element (merge schema/element {:kind :layout})]
+        new-element schema/element]
     (-> store
         (update-in
          (cons :tree (wrap-path focus))
@@ -36,7 +36,7 @@
           base-focus (pop focus)
           target-node (get-in tree (wrap-path base-focus))
           new-id (key-after (:children target-node) (last focus))
-          new-element (merge schema/element {:kind :layout})]
+          new-element schema/element]
       (-> store
           (update-in
            (cons :tree (wrap-path base-focus))
@@ -63,9 +63,18 @@
           base-focus (pop focus)
           target-node (get-in tree (wrap-path base-focus))
           new-id (key-before (:children target-node) (last focus))
-          new-element (merge schema/element {:kind :layout})]
+          new-element schema/element]
       (-> store
           (update-in
            (cons :tree (wrap-path base-focus))
            (fn [target-node] (assoc-in target-node [:children new-id] new-element)))
           (update :focus (fn [focus] (conj base-focus new-id)))))))
+
+(defn set-kind [store op-data]
+  (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:kind)) op-data))
+
+(defn set-layout [store op-data]
+  (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:layout)) op-data))
+
+(defn set-content [store op-data]
+  (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:content)) op-data))
