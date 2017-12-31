@@ -12,6 +12,7 @@
   (atom (-> reel-schema/reel (assoc :base schema/store) (assoc :store schema/store))))
 
 (defn dispatch! [op op-data]
+  (println "dispatch!" op)
   (let [op-id (id!), next-reel (reel-updater updater @*reel op op-data op-id)]
     (reset! *reel next-reel)))
 

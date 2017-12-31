@@ -1,6 +1,7 @@
 
 (ns app.schema )
 
-(def store {:states {}, :tree nil, :focus nil})
+(def element {:kind nil, :children {}, :layouts [], :styles {}, :content nil})
 
-(def element {:kind nil, :children [], :layouts [], :styles {}, :content nil})
+(def store
+  {:states {}, :tree (merge element {:kind :layout, :layouts [:fullscreen]}), :focus []})

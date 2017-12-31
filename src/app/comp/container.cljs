@@ -15,8 +15,8 @@
  (reel)
  (let [store (:store reel), states (:states store)]
    (div
-    {:style (merge ui/global ui/row)}
-    (comp-layer-tree)
+    {:style (merge ui/global ui/fullscreen ui/row)}
     (comp-previewer)
+    (comp-layer-tree (:tree store) (:focus store))
     (comp-properties)
-    (cursor-> :reel comp-reel states reel {}))))
+    (cursor-> :reel comp-reel states reel {:width "40%"}))))
