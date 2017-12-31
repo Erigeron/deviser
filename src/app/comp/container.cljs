@@ -19,5 +19,5 @@
     {:style (merge ui/global ui/fullscreen ui/row)}
     (comp-previewer)
     (comp-layer-tree (:tree store) (:focus store))
-    (comp-inspector (get-in (:tree store) (wrap-path (:focus store))))
+    (comp-inspector states (get-in (:tree store) (wrap-path (:focus store))))
     (cursor-> :reel comp-reel states reel {:width "40%"}))))

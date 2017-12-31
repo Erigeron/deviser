@@ -13,4 +13,5 @@
     :element/set-kind (element/set-kind store op-data)
     :element/layout (element/set-layout store op-data)
     :element/content (element/set-content store op-data)
+    :element/styles (element/set-styles store op-data)
     store))

@@ -3,16 +3,17 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo.macros :refer [defcomp cursor-> <> div button textarea span]]
-            [verbosely.core :refer [verbosely!]]
+            [verbosely.core :refer [log!]]
             [app.comp.kind-tabs :refer [comp-kind-tabs]]
             [app.comp.box-inspector :refer [comp-box-inspector]]
             [app.comp.text-inspector :refer [comp-text-inspector]]
             [app.comp.icon-inspector :refer [comp-icon-inspector]]
-            [app.comp.space-inspector :refer [comp-space-inspector]]))
+            [app.comp.space-inspector :refer [comp-space-inspector]]
+            [app.comp.styles :refer [comp-styles]]))
 
 (defcomp
  comp-inspector
- (element)
+ (states element)
  (div
   {:style ui/flex}
   (comp-kind-tabs (:kind element))
@@ -21,4 +22,5 @@
     :icon (comp-icon-inspector)
     :text (comp-text-inspector (:content element))
     :space (comp-space-inspector)
-    (<> "Unknown"))))
+    (<> "Unknown"))
+  (cursor-> :styles comp-styles states (:styles element))))
