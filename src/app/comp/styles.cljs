@@ -30,7 +30,9 @@
          (if (not (s/blank? state))
            (let [code state
                  [k v] (map s/trim (s/split code ":"))
-                 new-styles (if (s/blank? v) (dissoc styles k) (assoc styles k v))]
+                 new-styles (if (s/blank? v)
+                              (dissoc styles (keyword k))
+                              (assoc styles (keyword k) v))]
              (log! new-styles)
              (d! :element/styles new-styles)
              (m! nil))))}

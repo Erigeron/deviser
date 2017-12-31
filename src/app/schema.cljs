@@ -5,4 +5,4 @@
   {:kind :box, :content nil, :layout :center, :presets #{}, :styles {}, :children {}})
 
 (def store
-  {:states {}, :tree (merge element {:kind :box, :layouts [:fullscreen]}), :focus []})
+  {:states {}, :tree (merge element {:kind :box, :presets #{:fullscreen}}), :focus []})
