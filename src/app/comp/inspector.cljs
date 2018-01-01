@@ -9,6 +9,7 @@
             [app.comp.text-inspector :refer [comp-text-inspector]]
             [app.comp.icon-inspector :refer [comp-icon-inspector]]
             [app.comp.space-inspector :refer [comp-space-inspector]]
+            [app.comp.presets :refer [comp-presets]]
             [app.comp.styles :refer [comp-styles]]))
 
 (defcomp
@@ -23,4 +24,5 @@
     :text (comp-text-inspector (:content element))
     :space (comp-space-inspector)
     (<> "Unknown"))
+  (comp-presets (:presets element))
   (cursor-> :styles comp-styles states (:styles element))))
