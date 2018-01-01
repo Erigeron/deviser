@@ -11,14 +11,19 @@
 
 (def style-focused {:outline (str "1px solid red")})
 
-(defn render-space [element focused?]
+(defn render-space [element path focused?]
   (span
    {:style (merge
             {:min-width 1, :min-height 1}
             (:styles element)
-            (if focused? style-focused))}))
+            (if focused? style-focused)),
+    :on-click (fn [e d! m!] (d! :focus path))}))
 
-(defn render-icon [element focused?] (<> "this is an icon" (if focused? style-focused)))
+(defn render-icon [element path focused?]
+  (span
+   {:style (if focused? style-focused),
+    :inner-text "this is an icon",
+    :on-click (fn [e d! m!] (d! :focus path))}))
 
 (defn expand-presets [presets]
   (->> presets
@@ -31,10 +36,14 @@
             {:background-color :red})))
        (apply merge)))
 
-(defn render-text [tree focused?]
-  (<>
-   (:content tree)
-   (merge (expand-presets (:presets tree)) (:styles tree) (if focused? style-focused))))
+(defn render-text [tree path focused?]
+  (span
+   {:style (merge
+            (expand-presets (:presets tree))
+            (:styles tree)
+            (if focused? style-focused)),
+    :inner-text (:content tree),
+    :on-click (fn [e d! m!] (d! :focus path))}))
 
 (defn render-box [tree focus path]
   (list->
@@ -50,7 +59,8 @@
               {:background-color :red})
             (expand-presets (:presets tree))
             (:styles tree)
-            (if (= focus path) style-focused))}
+            (if (= focus path) style-focused)),
+    :on-click (fn [e d! m!] (d! :focus path))}
    (->> (:children tree)
         (map (fn [[k v]] [k (render-tree v focus (conj path k))]))
         (sort-by first))))
@@ -58,9 +68,9 @@
 (defn render-tree [tree focus path]
   (case (:kind tree)
     :box (render-box tree focus path)
-    :text (render-text tree (= focus path))
-    :icon (render-icon tree (= focus path))
-    :space (render-space tree (= focus path))
+    :text (render-text tree path (= focus path))
+    :icon (render-icon tree path (= focus path))
+    :space (render-space tree path (= focus path))
     (<> "Unknown")))
 
 (defcomp
