@@ -4,13 +4,14 @@
             [respo-ui.style :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
             [verbosely.core :refer [verbosely!]]
-            [app.style :as style]))
+            [app.style :as style]
+            [app.comp.color-picker :refer [comp-color-picker]]))
 
 (def layouts [:row :column :center :row-center :row-parted :column-parted])
 
 (defcomp
  comp-box-inspector
- (current-layout)
+ (states current-layout color)
  (div
   {}
   (div {} (<> "Layout Picker"))
@@ -28,4 +29,15 @@
                          (hsl 240 90 80)
                          (hsl 240 60 90))}),
               :on-click (fn [e d! m!] (d! :element/layout layout))}
-             (<> (name layout)))]))))))
+             (<> (name layout)))]))))
+  (div
+   {}
+   (div
+    {}
+    (<> "background-color:")
+    (cursor->
+     :color-picker
+     comp-color-picker
+     states
+     color
+     (fn [new-color d!] (d! :element/change-style [:background-color new-color])))))))

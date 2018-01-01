@@ -21,9 +21,13 @@
   (div
    {:style {:padding 8}}
    (case (:kind element)
-     :box (comp-box-inspector (:layout element))
+     :box
+       (comp-box-inspector
+        states
+        (:layout element)
+        (get-in element [:styles :background-color]))
      :icon (comp-icon-inspector)
-     :text (comp-text-inspector (:content element))
+     :text (comp-text-inspector states (:content element) (get-in element [:styles :color]))
      :space (comp-space-inspector)
      (<> "Unknown"))
    (comp-presets (:presets element))

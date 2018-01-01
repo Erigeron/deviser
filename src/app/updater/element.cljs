@@ -4,6 +4,9 @@
             [app.schema :as schema]
             [app.util :refer [wrap-path]]))
 
+(defn change-style [store [k v]]
+  (assoc-in store (concat (list :tree) (wrap-path (:focus store)) (list :styles k)) v))
+
 (defn after-item [store op-data]
   (if (empty? (:focus store))
     store

@@ -15,4 +15,5 @@
     :element/content (element/set-content store op-data)
     :element/styles (element/set-styles store op-data)
     :element/presets (element/set-presets store op-data)
+    :element/change-style (element/change-style store op-data)
     store))
