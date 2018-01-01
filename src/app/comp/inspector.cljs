@@ -18,11 +18,13 @@
  (div
   {:style ui/flex}
   (comp-kind-tabs (:kind element) (not (empty? (:children element))))
-  (case (:kind element)
-    :box (comp-box-inspector (:layout element))
-    :icon (comp-icon-inspector)
-    :text (comp-text-inspector (:content element))
-    :space (comp-space-inspector)
-    (<> "Unknown"))
-  (comp-presets (:presets element))
-  (cursor-> :styles comp-styles states (:styles element))))
+  (div
+   {:style {:padding 8}}
+   (case (:kind element)
+     :box (comp-box-inspector (:layout element))
+     :icon (comp-icon-inspector)
+     :text (comp-text-inspector (:content element))
+     :space (comp-space-inspector)
+     (<> "Unknown"))
+   (comp-presets (:presets element))
+   (cursor-> :styles comp-styles states (:styles element)))))

@@ -53,6 +53,9 @@
 (defn set-content [store op-data]
   (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:content)) op-data))
 
+(defn set-presets [store op-data]
+  (assoc-in store (flatten (list :tree (wrap-path (:focus store)) :presets)) op-data))
+
 (defn set-kind [store op-data]
   (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:kind)) op-data))
 
