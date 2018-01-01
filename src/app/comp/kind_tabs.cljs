@@ -7,11 +7,11 @@
 
 (defcomp
  comp-kind-tabs
- (kind)
+ (kind has-children?)
  (list->
   :div
   {:style ui/row}
-  (->> (list :box :text :icon :space)
+  (->> (if has-children? (list :box) (list :box :text :icon :space))
        (map
         (fn [x]
           [x
@@ -22,4 +22,4 @@
                      {:cursor :pointer}
                      (if (= kind x) {:border-bottom (str "1px solid " (hsl 0 0 80))})),
              :on-click (fn [e d! m!] (d! :element/set-kind x))}
-            (<> x))])))))
+            (<> (name x)))])))))

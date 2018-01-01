@@ -16,7 +16,7 @@
  (states element)
  (div
   {:style ui/flex}
-  (comp-kind-tabs (:kind element))
+  (comp-kind-tabs (:kind element) (not (empty? (:children element))))
   (case (:kind element)
     :box (comp-box-inspector (:layout element))
     :icon (comp-icon-inspector)

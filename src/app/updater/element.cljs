@@ -28,11 +28,13 @@
         target-node (get-in tree (wrap-path focus))
         new-id (key-append (:children target-node))
         new-element schema/element]
-    (-> store
-        (update-in
-         (cons :tree (wrap-path focus))
-         (fn [target-node] (assoc-in target-node [:children new-id] new-element)))
-        (update :focus (fn [focus] (conj focus new-id))))))
+    (if (= :box (:kind target-node))
+      (-> store
+          (update-in
+           (cons :tree (wrap-path focus))
+           (fn [target-node] (assoc-in target-node [:children new-id] new-element)))
+          (update :focus (fn [focus] (conj focus new-id))))
+      store)))
 
 (defn prepend-item [store op-data]
   (let [tree (:tree store)
@@ -40,11 +42,13 @@
         target-node (get-in tree (wrap-path focus))
         new-id (key-prepend (:children target-node))
         new-element schema/element]
-    (-> store
-        (update-in
-         (cons :tree (wrap-path focus))
-         (fn [target-node] (assoc-in target-node [:children new-id] new-element)))
-        (update :focus (fn [focus] (conj focus new-id))))))
+    (if (= :box (:kind target-node))
+      (-> store
+          (update-in
+           (cons :tree (wrap-path focus))
+           (fn [target-node] (assoc-in target-node [:children new-id] new-element)))
+          (update :focus (fn [focus] (conj focus new-id))))
+      store)))
 
 (defn set-content [store op-data]
   (assoc-in store (concat '(:tree) (wrap-path (:focus store)) '(:content)) op-data))

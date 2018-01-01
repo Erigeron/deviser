@@ -9,10 +9,16 @@
 
 (declare render-box)
 
-(defn render-space [element]
-  (span {:style (merge {:min-width 1, :min-height 1} (:styles element))}))
+(def style-focused {:outline (str "1px solid red")})
 
-(defn render-icon [element] (<> "this is an icon"))
+(defn render-space [element focused?]
+  (span
+   {:style (merge
+            {:min-width 1, :min-height 1}
+            (:styles element)
+            (if focused? style-focused))}))
+
+(defn render-icon [element focused?] (<> "this is an icon" (if focused? style-focused)))
 
 (defn expand-presets [presets]
   (->> presets
@@ -25,10 +31,12 @@
             {:background-color :red})))
        (apply merge)))
 
-(defn render-text [tree]
-  (<> (:content tree) (merge (expand-presets (:presets tree)) (:styles tree))))
+(defn render-text [tree focused?]
+  (<>
+   (:content tree)
+   (merge (expand-presets (:presets tree)) (:styles tree) (if focused? style-focused))))
 
-(defn render-box [tree]
+(defn render-box [tree focus path]
   (list->
    :div
    {:style (merge
@@ -41,18 +49,21 @@
               :column-parted ui/column-parted
               {:background-color :red})
             (expand-presets (:presets tree))
-            (:styles tree))}
-   (->> (:children tree) (map (fn [[k v]] [k (render-tree v)])) (sort-by first))))
+            (:styles tree)
+            (if (= focus path) style-focused))}
+   (->> (:children tree)
+        (map (fn [[k v]] [k (render-tree v focus (conj path k))]))
+        (sort-by first))))
 
-(defn render-tree [tree]
+(defn render-tree [tree focus path]
   (case (:kind tree)
-    :box (render-box tree)
-    :text (render-text tree)
-    :icon (render-icon tree)
-    :space (render-space tree)
+    :box (render-box tree focus path)
+    :text (render-text tree (= focus path))
+    :icon (render-icon tree (= focus path))
+    :space (render-space tree (= focus path))
     (<> "Unknown")))
 
 (defcomp
  comp-previewer
- (tree)
- (div {:style (merge ui/flex {:position :relative})} (render-tree tree)))
+ (tree focus)
+ (div {:style (merge ui/flex {:position :relative})} (render-tree tree focus [])))
