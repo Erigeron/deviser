@@ -6371,7 +6371,7 @@
           :type :expr, :time 1499755354983, :id "r1S4xiuKqpBb"
           :data {
            "T" {:type :leaf, :author "root", :time 1499755354983, :text ":icon", :id "Sy8VgidK5pr-"}
-           "j" {:type :leaf, :author "root", :time 1508248023135, :text "|http://cdn.tiye.me/logo/erigerion.png", :id "ByDVlsuY56r-", :at 1514542845089, :by "root"}
+           "j" {:type :leaf, :author "root", :time 1508248023135, :text "|http://cdn.tiye.me/logo/deviser.png", :id "ByDVlsuY56r-", :at 1514822885155, :by "root"}
           }
          }
          "v" {

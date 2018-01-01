@@ -9,7 +9,7 @@
 
 (def base-info
   {:title "Deviser",
-   :icon "http://cdn.tiye.me/logo/erigerion.png",
+   :icon "http://cdn.tiye.me/logo/deviser.png",
    :ssr nil,
    :inline-html nil,
    :inline-styles [(slurp "./entry/main.css")]})
