@@ -6,7 +6,7 @@
             [verbosely.core :refer [verbosely!]]
             [app.style :as style]))
 
-(def default-presets (list :button :clickable-text))
+(def default-presets (list :flex :button :clickable-text))
 
 (defcomp
  comp-presets

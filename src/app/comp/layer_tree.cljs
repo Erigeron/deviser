@@ -7,14 +7,6 @@
             [verbosely.core :refer [verbosely!]]
             [app.style :as style]))
 
-(defn render-text [tree path]
-  (div
-   {:style (merge
-            style/button
-            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
-    :on-click (fn [e d! m!] (d! :focus path))}
-   (<> (str "text:" (:content tree)))))
-
 (defn render-box [tree path]
   (div
    {:style (merge
@@ -22,6 +14,14 @@
             {:background-color (hsl 240 80 90), :padding "0 8px", :margin "1px 2px"}),
     :on-click (fn [e d! m!] (d! :focus path))}
    (<> (:layout tree))))
+
+(defn render-icon [tree path]
+  (div
+   {:style (merge
+            style/button
+            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
+    :on-click (fn [e d! m!] (d! :focus path))}
+   (<> (str "icon"))))
 
 (defn render-space [tree path]
   (div
@@ -31,13 +31,13 @@
     :on-click (fn [e d! m!] (d! :focus path))}
    (<> "space")))
 
-(defn render-icon [tree path]
+(defn render-text [tree path]
   (div
    {:style (merge
             style/button
             {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
     :on-click (fn [e d! m!] (d! :focus path))}
-   (<> (str "icon"))))
+   (<> (str "text:" (:content tree)))))
 
 (defn render-element [tree focus path]
   (div
