@@ -20,6 +20,8 @@
                      ui/flex
                      ui/center
                      {:cursor :pointer}
-                     (if (= kind x) {:border-bottom (str "1px solid " (hsl 0 0 80))})),
+                     {:border-bottom (str
+                                      "1px solid "
+                                      (if (= kind x) (hsl 0 0 70) (hsl 0 0 94)))}),
              :on-click (fn [e d! m!] (d! :element/set-kind x))}
             (<> (name x)))])))))

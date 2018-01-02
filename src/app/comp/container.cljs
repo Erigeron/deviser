@@ -11,6 +11,8 @@
             [app.comp.inspector :refer [comp-inspector]]
             [app.util :refer [wrap-path]]))
 
+(def divider (div {:style {:width 1, :background-color (hsl 0 0 80)}}))
+
 (defcomp
  comp-container
  (reel)
@@ -18,6 +20,8 @@
    (div
     {:style (merge ui/global ui/fullscreen ui/row)}
     (comp-previewer (:tree store) (:focus store))
+    divider
     (comp-layer-tree (:tree store) (:focus store))
+    divider
     (comp-inspector states (get-in (:tree store) (wrap-path (:focus store))))
     (cursor-> :reel comp-reel states reel {:width "40%"}))))

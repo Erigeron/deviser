@@ -77,4 +77,6 @@
 (defcomp
  comp-previewer
  (tree focus)
- (div {:style (merge ui/flex {:position :relative})} (render-tree tree focus [])))
+ (div
+  {:style (merge ui/flex {:position :relative, :cursor :default})}
+  (render-tree tree focus [])))

@@ -7,11 +7,17 @@
             [verbosely.core :refer [verbosely!]]
             [app.style :as style]))
 
+(defn render-action [guide action]
+  (button
+   {:style (merge style/button {:font-size 12, :line-height "20px", :margin-right 8}),
+    :on-click (fn [e d! m!] (d! action nil))}
+   (<> guide)))
+
 (defn render-box [tree path]
   (div
    {:style (merge
             style/button
-            {:background-color (hsl 240 80 90), :padding "0 8px", :margin "1px 2px"}),
+            {:background-color (hsl 240 80 80), :padding "0 8px", :margin "0px 0px"}),
     :on-click (fn [e d! m!] (d! :focus path))}
    (<> (:layout tree))))
 
@@ -19,7 +25,7 @@
   (div
    {:style (merge
             style/button
-            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
+            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "0"}),
     :on-click (fn [e d! m!] (d! :focus path))}
    (<> (str "icon"))))
 
@@ -27,7 +33,7 @@
   (div
    {:style (merge
             style/button
-            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
+            {:background-color (hsl 120 60 80), :padding "0 8px", :margin "0px"}),
     :on-click (fn [e d! m!] (d! :focus path))}
    (<> "space")))
 
@@ -35,13 +41,19 @@
   (div
    {:style (merge
             style/button
-            {:background-color (hsl 0 0 50), :padding "0 8px", :margin "1px 2px"}),
+            {:background-color (hsl 0 0 94),
+             :padding "0 8px",
+             :margin "0px 0px",
+             :color (hsl 0 0 40)}),
     :on-click (fn [e d! m!] (d! :focus path))}
-   (<> (str "text:" (:content tree)))))
+   (<> (str "<>" (:content tree)))))
 
 (defn render-element [tree focus path]
   (div
-   {:style (merge (if (= focus path) {:border-left (str "1px solid " (hsl 60 90 30))}))}
+   {:style (merge
+            {:border-left (str
+                           "1px solid "
+                           (if (= focus path) (hsl 60 90 30) (hsl 60 90 90)))})}
    (let [kind (:kind tree)] )
    (case (:kind tree)
      :box (render-box tree path)
@@ -51,34 +63,27 @@
      "Unknown")
    (list->
     :div
-    {:style {:padding "0 0 0 24px", :border-left (str "1px solid " (hsl 0 0 90))}}
+    {:style {:padding "0 0 0 24px"}}
     (->> (:children tree)
          (map (fn [[k v]] [k (render-element v focus (conj path k))]))
          (sort-by first)))))
 
 (defn render-toolbar [focus]
   (div
-   {:style {:border-bottom (str "1px solid " (hsl 0 0 80))}}
-   (button
-    {:style style/button, :on-click (fn [e d! m!] (d! :element/append nil))}
-    (<> "append"))
-   (button
-    {:style style/button, :on-click (fn [e d! m!] (d! :element/prepend nil))}
-    (<> "prepend"))
-   (button {:style style/button, :on-click (fn [e d! m!] (d! :element/after))} (<> "after"))
-   (button
-    {:style style/button, :on-click (fn [e d! m!] (d! :element/before))}
-    (<> "before"))
-   (button
-    {:style style/button, :on-click (fn [e d! m!] (d! :element/remove))}
-    (<> "remove"))
-   (<> (pr-str focus))))
+   {:style {:border-bottom (str "1px solid " (hsl 0 0 80)), :padding "4px 8px"}}
+   (render-action "Append" :element/append)
+   (render-action "Prepend" :element/prepend)
+   (render-action "After" :element/after)
+   (render-action "Before" :element/before)
+   (render-action "Remove" :element/remove)))
 
 (defcomp
  comp-layer-tree
  (tree focus)
  (div
-  {:style (merge ui/flex ui/column {:padding 8, :background-color (hsl 0 0 96)})}
+  {:style (merge ui/flex ui/column {:background-color (hsl 0 0 100)})}
   (render-toolbar focus)
   (=< nil 8)
-  (div {:style (merge ui/flex {:overflow :auto})} (render-element tree focus []))))
+  (div
+   {:style (merge ui/flex {:overflow :auto, :padding "4px 8px"})}
+   (render-element tree focus []))))

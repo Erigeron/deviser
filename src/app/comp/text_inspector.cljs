@@ -3,6 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo.macros :refer [defcomp cursor-> <> div button textarea span]]
+            [respo.comp.space :refer [=<]]
             [verbosely.core :refer [verbosely!]]
             [app.style :as style]
             [app.comp.color-picker :refer [comp-color-picker]]))
@@ -11,8 +12,8 @@
  comp-text-inspector
  (states content color)
  (div
-  {:style {:border "1px solid black"}}
-  (div {} (<> "text inspector"))
+  {:style {}}
+  (div {:style style/area-heading} (<> "Text"))
   (div
    {}
    (textarea
@@ -20,11 +21,12 @@
      :value content,
      :placeholder "text content",
      :on-input (fn [e d! m!] (d! :element/content (:value e)))}))
+  (=< nil 8)
   (div
    {}
    (div
     {}
-    (<> "color:")
+    (<> "color: ")
     (cursor->
      :color-picker
      comp-color-picker

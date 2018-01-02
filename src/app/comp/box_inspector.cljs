@@ -14,7 +14,7 @@
  (states current-layout color)
  (div
   {}
-  (div {} (<> "Layout Picker"))
+  (div {:style style/area-heading} (<> "Layout Picker"))
   (list->
    :div
    {}
@@ -34,7 +34,7 @@
    {}
    (div
     {}
-    (<> "background-color:")
+    (<> "background-color: ")
     (cursor->
      :color-picker
      comp-color-picker

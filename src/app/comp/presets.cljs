@@ -13,7 +13,7 @@
  (presets)
  (div
   {}
-  (div {} (<> "Presets"))
+  (div {:style style/area-heading} (<> "Presets"))
   (list->
    :div
    {}
@@ -28,7 +28,6 @@
                         {}
                         {:background-color :white,
                          :border (str "1px solid " (hsl 0 0 70)),
-                         :border-radius "8px",
                          :color (hsl 0 0 70)})),
               :on-click (fn [e d! m!]
                 (d!
