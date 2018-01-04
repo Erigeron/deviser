@@ -1,8 +1,8 @@
 
-(ns app.updater.element
+(ns server.updater.element
   (:require [bisection-key.util :refer [key-append key-prepend key-after key-before]]
-            [app.schema :as schema]
-            [app.util :refer [wrap-path]]))
+            [server.schema :as schema]
+            [server.util :refer [wrap-path]]))
 
 (defn after-item [store op-data]
   (if (empty? (:focus store))

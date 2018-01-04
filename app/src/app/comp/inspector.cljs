@@ -15,6 +15,7 @@
 (defcomp
  comp-inspector
  (states element)
+ (log! (pr-str states))
  (div
   {:style ui/flex}
   (comp-kind-tabs (:kind element) (not (empty? (:children element))))
