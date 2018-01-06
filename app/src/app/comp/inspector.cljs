@@ -29,7 +29,7 @@
         (get-in element [:styles :background-color]))
      :icon (comp-icon-inspector)
      :text (comp-text-inspector states (:content element) (get-in element [:styles :color]))
-     :space (comp-space-inspector)
+     :space (comp-space-inspector (:styles element))
      (<> "Unknown"))
    (comp-presets (:presets element))
    (cursor-> :styles comp-styles states (:styles element)))))
