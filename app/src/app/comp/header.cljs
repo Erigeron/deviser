@@ -3,7 +3,8 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo-ui.style.colors :as colors]
-            [respo.macros :refer [defcomp <> span div]]))
+            [respo.macros :refer [defcomp <> span div]]
+            [respo.comp.space :refer [=<]]))
 
 (defn on-home [e dispatch!]
   (dispatch! :router/change {:name :home, :data nil, :router nil}))
@@ -28,7 +29,14 @@
  (logged-in?)
  (div
   {:style (merge ui/row-center style-header)}
-  (div {:on-click on-home, :style style-logo} (<> span "Cumulo" nil))
+  (div
+   {:style ui/row}
+   (div {:on-click on-home, :style style-logo} (<> "Deviser"))
+   (=< 16 nil)
+   (div
+    {:style style-logo,
+     :on-click (fn [e d! m!] (d! :router/change {:name :preview, :data nil, :router nil}))}
+    (<> "Preview")))
   (div
    {:style style-pointer, :on-click on-profile}
    (<> span (if logged-in? "Me" "Guest") nil))))

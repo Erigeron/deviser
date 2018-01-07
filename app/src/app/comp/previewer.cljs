@@ -3,7 +3,9 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.style :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
-            [verbosely.core :refer [log!]]))
+            [verbosely.core :refer [log!]]
+            [respo.core :refer [create-element]]
+            [app.style :as style]))
 
 (declare render-box)
 
@@ -78,5 +80,14 @@
  comp-previewer
  (tree focus)
  (div
-  {:style (merge ui/flex {:position :relative, :cursor :default})}
-  (render-tree tree focus [])))
+  {:style (merge ui/global ui/fullscreen {:cursor :default, :background-color :white})}
+  (render-tree tree focus [])
+  (div
+   {:style {:position :absolute,
+            :right 8,
+            :top 8,
+            :font-weight 100,
+            :font-family style/font-fancy,
+            :cursor :pointer},
+    :on-click (fn [e d! m!] (d! :router/change {:name :home, :data nil}))}
+   (<> "Close"))))

@@ -11,7 +11,8 @@
             [app.comp.login :refer [comp-login]]
             [respo-message.comp.msg-list :refer [comp-msg-list]]
             [app.comp.reel :refer [comp-reel]]
-            [app.comp.home :refer [comp-home]]))
+            [app.comp.home :refer [comp-home]]
+            [app.comp.previewer :refer [comp-previewer]]))
 
 (def style-alert {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
 
@@ -39,7 +40,8 @@
            (case (:name router)
              :profile (comp-profile (:user store))
              :home (comp-home states store)
-             (<> "404 page")))
+             :preview (comp-previewer (:tree store) (:focus store))
+             (<> (str "404 " (:name router)))))
          (comp-login states)))
       (comp-inspect "Store" store style-debugger)
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)

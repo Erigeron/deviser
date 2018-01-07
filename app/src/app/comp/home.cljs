@@ -6,7 +6,6 @@
             [verbosely.core :refer [log!]]
             [respo.comp.space :refer [=<]]
             [app.comp.layer-tree :refer [comp-layer-tree]]
-            [app.comp.previewer :refer [comp-previewer]]
             [app.comp.inspector :refer [comp-inspector]]
             [app.util :refer [wrap-path]]))
 
@@ -17,7 +16,6 @@
  (states store)
  (div
   {:style (merge ui/flex ui/row)}
-  (comp-previewer (:tree store) (:focus store))
   divider
   (comp-layer-tree (:tree store) (:focus store))
   divider
