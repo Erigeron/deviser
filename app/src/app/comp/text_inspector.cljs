@@ -11,25 +11,30 @@
 (defcomp
  comp-text-inspector
  (states content color)
- (div
-  {:style {}}
-  (div {:style style/area-heading} (<> "Text"))
-  (div
-   {}
-   (textarea
-    {:style style/textarea,
-     :value content,
-     :placeholder "text content",
-     :on-input (fn [e d! m!] (d! :element/content (:value e)))}))
-  (=< nil 8)
-  (div
-   {}
+ (let [state (or (:data states) {:text ""})]
    (div
-    {}
-    (<> "color: ")
-    (cursor->
-     :color-picker
-     comp-color-picker
-     states
-     color
-     (fn [color d!] (d! :element/change-style [:color color])))))))
+    {:style {}}
+    (div {:style style/area-heading} (<> "Text"))
+    (div {} (<> content))
+    (div
+     {}
+     (textarea
+      {:style style/textarea,
+       :value (:text state),
+       :placeholder "text content",
+       :on-input (fn [e d! m!] (m! (assoc state :text (:value e))))})
+     (button
+      {:style style/button, :on-click (fn [e d! m!] (d! :element/content (:text state)))}
+      (<> "change")))
+    (=< nil 8)
+    (div
+     {}
+     (div
+      {}
+      (<> "color: ")
+      (cursor->
+       :color-picker
+       comp-color-picker
+       states
+       color
+       (fn [color d!] (d! :element/change-style [:color color]))))))))
