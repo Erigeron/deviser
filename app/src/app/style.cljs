@@ -14,4 +14,6 @@
 
 (def input (merge ui/input))
 
+(def mono "Source Code Pro,Menlo,monospace")
+
 (def textarea (merge ui/textarea))

@@ -1,0 +1,16 @@
+
+(ns app.comp.code-reader
+  (:require [hsl.core :refer [hsl]]
+            [respo-ui.style :as ui]
+            [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
+            [verbosely.core :refer [verbosely!]]
+            [app.style :as style]))
+
+(defcomp
+ comp-code-reader
+ (tree)
+ (div
+  {}
+  (textarea
+   {:style (merge style/textarea {:width 800, :height 400, :font-family style/mono}),
+    :value (pr-str tree)})))

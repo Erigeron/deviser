@@ -36,7 +36,12 @@
    (div
     {:style style-logo,
      :on-click (fn [e d! m!] (d! :router/change {:name :preview, :data nil, :router nil}))}
-    (<> "Preview")))
+    (<> "Preview"))
+   (=< 16 nil)
+   (div
+    {:style style-logo,
+     :on-click (fn [e d! m!] (d! :router/change {:name :code, :data nil, :router nil}))}
+    (<> "Code")))
   (div
    {:style style-pointer, :on-click on-profile}
    (<> span (if logged-in? "Me" "Guest") nil))))
