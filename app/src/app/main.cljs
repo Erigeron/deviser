@@ -6,9 +6,12 @@
             [cljs.reader :refer [read-string]]
             [verbosely.core :refer [log!]]
             [app.network :refer [send! setup-socket!]]
-            [app.schema :as schema]))
+            [app.schema :as schema]
+            ("url-parse" :as parse)))
 
 (declare dispatch!)
+
+(declare try-preview!)
 
 (declare connect!)
 
@@ -17,6 +20,10 @@
 (defonce *states (atom {}))
 
 (defonce *store (atom nil))
+
+(defn try-preview! []
+  (let [initial-page (-> (parse js/location.href true) .-query .-page)]
+    (if (= initial-page "preview") (dispatch! :router/change {:name :preview}))))
 
 (defn simulate-login! []
   (let [raw (.getItem js/localStorage (:storage-key schema/configs))]
@@ -28,15 +35,15 @@
   (log! "Dispatch" op op-data)
   (case op
     :states (reset! *states ((mutate op-data) @*states))
-    :effect/connect (connect!)
+    :effect/connect (connect! try-preview!)
     (send! op op-data)))
 
-(defn connect! []
+(defn connect! [cb!]
   (setup-socket!
    *store
    {:url (str "ws://" (.-hostname js/location) ":" (:port schema/configs)),
     :on-close! (fn [event] (reset! *store nil) (.error js/console "Lost connection!")),
-    :on-open! (fn [event] (simulate-login!))}))
+    :on-open! (fn [event] (simulate-login!) (cb!))}))
 
 (def mount-target (.querySelector js/document ".app"))
 
@@ -48,7 +55,7 @@
 (defn main! []
   (if ssr? (render-app! realize-ssr!))
   (render-app! render!)
-  (connect!)
+  (connect! try-preview!)
   (add-watch *store :changes #(render-app! render!))
   (add-watch *states :changes #(render-app! render!))
   (println "App started!"))
