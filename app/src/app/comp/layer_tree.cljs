@@ -1,7 +1,7 @@
 
 (ns app.comp.layer-tree
   (:require [hsl.core :refer [hsl]]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
             [verbosely.core :refer [verbosely!]]

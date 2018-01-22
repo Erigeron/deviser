@@ -1,7 +1,7 @@
 
 (ns app.comp.color-picker
   (:require [hsl.core :refer [hsl]]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
             [verbosely.core :refer [verbosely!]]))
 

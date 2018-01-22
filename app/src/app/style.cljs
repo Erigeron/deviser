@@ -1,5 +1,5 @@
 
-(ns app.style (:require [respo-ui.style :as ui] [hsl.core :refer [hsl]]))
+(ns app.style (:require [respo-ui.core :as ui] [hsl.core :refer [hsl]]))
 
 (def area-heading
   {:color (hsl 120 20 40),

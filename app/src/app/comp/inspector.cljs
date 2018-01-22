@@ -1,7 +1,7 @@
 
 (ns app.comp.inspector
   (:require [hsl.core :refer [hsl]]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> <> div button textarea span]]
             [verbosely.core :refer [log!]]
             [app.comp.kind-tabs :refer [comp-kind-tabs]]

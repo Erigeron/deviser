@@ -1,7 +1,7 @@
 
 (ns app.comp.styles
   (:require [hsl.core :refer [hsl]]
-            [respo-ui.style :as ui]
+            [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button input span]]
             [respo.comp.space :refer [=<]]
             [verbosely.core :refer [log!]]
