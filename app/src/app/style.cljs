@@ -12,6 +12,8 @@
 
 (def font-fancy "Josefin Sans, Helvetica, Arial, sans-serif")
 
+(def icon (merge ui/center {:width 32, :height 32, :cursor :pointer}))
+
 (def input (merge ui/input))
 
 (def mono "Source Code Pro,Menlo,monospace")

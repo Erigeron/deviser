@@ -81,13 +81,4 @@
  (tree focus)
  (div
   {:style (merge ui/global ui/fullscreen {:cursor :default, :background-color :white})}
-  (render-tree tree focus [])
-  (div
-   {:style {:position :absolute,
-            :right 8,
-            :top 8,
-            :font-weight 100,
-            :font-family style/font-fancy,
-            :cursor :pointer},
-    :on-click (fn [e d! m!] (d! :router/change {:name :home, :data nil}))}
-   (<> "Close"))))
+  (render-tree tree focus [])))

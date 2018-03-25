@@ -4,7 +4,9 @@
             [respo-ui.core :as ui]
             [respo-ui.colors :as colors]
             [respo.macros :refer [defcomp <> span div]]
-            [respo.comp.space :refer [=<]]))
+            [respo.comp.space :refer [=<]]
+            [respo-ui.comp.icon :refer [comp-icon]]
+            [app.style :as style]))
 
 (defn on-home [e dispatch!]
   (dispatch! :router/change {:name :home, :data nil, :router nil}))
@@ -12,35 +14,28 @@
 (defn on-profile [e dispatch!]
   (dispatch! :router/change {:name :profile, :data nil, :router nil}))
 
-(def style-header
-  {:height 48,
-   :justify-content :space-between,
-   :padding "0 16px",
-   :font-size 16,
-   :border-bottom (str "1px solid " (hsl 0 0 86))})
-
-(def style-logo {:cursor :pointer})
-
-(def style-pointer {:cursor "pointer"})
-
 (defcomp
  comp-header
  (logged-in?)
  (div
-  {:style (merge ui/row-center style-header)}
+  {:style (merge
+           ui/column-parted
+           {:font-size 24,
+            :padding "8px 4px",
+            :border-right (str "1px solid " (hsl 0 0 86))})}
   (div
-   {:style ui/row}
-   (div {:on-click on-home, :style style-logo} (<> "Deviser"))
-   (=< 16 nil)
+   {:style ui/column-parted}
    (div
-    {:style style-logo,
-     :on-click (fn [e d! m!] (d! :router/change {:name :preview, :data nil, :router nil}))}
-    (<> "Preview"))
-   (=< 16 nil)
+    {:on-click on-home, :style (merge style/icon {:cursor :pointer})}
+    (comp-icon :settings))
+   (=< nil 8)
    (div
-    {:style style-logo,
+    {:style (merge style/icon),
      :on-click (fn [e d! m!] (d! :router/change {:name :code, :data nil, :router nil}))}
-    (<> "Code")))
-  (div
-   {:style style-pointer, :on-click on-profile}
-   (<> span (if logged-in? "Me" "Guest") nil))))
+    (comp-icon :quote))
+   (=< nil 8)
+   (div
+    {:style (merge style/icon {:color (hsl 240 100 76)}),
+     :on-click (fn [e d! m!] (.open js/window (str location.href "?page=preview")))}
+    (comp-icon :ios-eye)))
+  (div {:style (merge style/icon), :on-click on-profile} (comp-icon :android-contact))))

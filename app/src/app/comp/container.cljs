@@ -3,7 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo-ui.colors :as colors]
-            [respo.macros :refer [defcomp <> div span button]]
+            [respo.macros :refer [defcomp <> action-> div span button]]
             [respo.comp.inspect :refer [comp-inspect]]
             [respo.comp.space :refer [=<]]
             [app.comp.header :refer [comp-header]]
@@ -16,24 +16,23 @@
             [app.comp.code-reader :refer [comp-code-reader]]
             [app.schema :refer [dev?]]))
 
-(def style-alert {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
+(defcomp
+ comp-offline
+ ()
+ (span
+  {:style {:cursor :pointer}, :on-click (action-> :effect/connect nil)}
+  (<> "No connection!" {:font-family ui/font-fancy, :font-weight 100, :font-size 40})))
 
 (def style-body {:padding "8px 16px"})
-
-(def style-debugger {:bottom 0, :left 0, :max-width "100%"})
 
 (defcomp
  comp-container
  (states store)
  (let [state (:data states), session (:session store)]
    (if (nil? store)
+     (div {:style (merge ui/global ui/fullscreen ui/center)} (comp-offline))
      (div
-      {:style (merge ui/global ui/fullscreen ui/center)}
-      (span
-       {:style {:cursor :pointer}, :on-click (fn [e d! m!] (d! :effect/connect nil))}
-       (<> "No connection!" style-alert)))
-     (div
-      {:style (merge ui/global ui/fullscreen ui/column)}
+      {:style (merge ui/global ui/fullscreen ui/row)}
       (comp-header (:logged-in? store))
       (div
        {:style (merge ui/flex ui/column style-body)}
@@ -46,6 +45,6 @@
              :code (comp-code-reader (:tree store))
              (<> (str "404 " (:name router)))))
          (comp-login states)))
-      (when dev? (comp-inspect "Store" store style-debugger))
+      (when dev? (comp-inspect "Store" store {:bottom 30, :right 0, :max-width "100%"}))
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
-      (when dev? (comp-reel (:reel-length store) {}))))))
+      (when dev? (comp-reel (:reel-length store) {:bottom 0}))))))
