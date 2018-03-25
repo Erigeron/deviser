@@ -17,9 +17,9 @@
  (states element)
  (div
   {:style ui/flex}
-  (comp-kind-tabs (:kind element) (not (empty? (:children element))))
+  (cursor-> :tabs comp-kind-tabs states (:kind element) (not (empty? (:children element))))
   (div
-   {:style {:padding 8}}
+   {:style {}}
    (case (:kind element)
      :box
        (comp-box-inspector
