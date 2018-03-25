@@ -71,7 +71,7 @@
             (expand-presets (:presets tree))
             (:styles tree)
             (if (= focus path) style-focused)),
-    :on-click (fn [e d! m!] (d! :focus path))}
+    :on-click (fn [e d! m!] (println "Touch on path:" path))}
    (->> (:children tree)
         (map (fn [[k v]] [k (render-tree v focus (conj path k))]))
         (sort-by first))))

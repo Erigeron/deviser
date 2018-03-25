@@ -25,5 +25,6 @@
                  :element/content element/set-content
                  :element/styles element/set-styles
                  :element/presets element/set-presets
-                 :element/change-style element/change-style)]
+                 :element/change-style element/change-style
+                 (identity nil))]
     (if (fn? method) (method db op-data sid op-id op-time) (do (println "Unknown op:" op) db))))

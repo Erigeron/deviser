@@ -2803,7 +2803,13 @@
                  "j" {:type :leaf, :by "root", :at 1515059868816, :text "element/change-style", :id "SyzEBjcuoXG"}
                 }
                }
-               "yv" {:type :leaf, :id "BykZNlLbxRSW", :text "nil", :by "root", :at 1521971585926}
+               "yv" {
+                :type :expr, :by "root", :at 1521973186632, :id "S1jTPlr5G"
+                :data {
+                 "D" {:type :leaf, :by "root", :at 1521973198046, :text "identity", :id "HyxiaPgSqG"}
+                 "T" {:type :leaf, :id "BykZNlLbxRSW", :text "nil", :by "root", :at 1521971585926}
+                }
+               }
               }
              }
             }

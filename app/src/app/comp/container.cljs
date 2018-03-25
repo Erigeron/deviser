@@ -21,7 +21,9 @@
  ()
  (span
   {:style {:cursor :pointer}, :on-click (action-> :effect/connect nil)}
-  (<> "No connection!" {:font-family ui/font-fancy, :font-weight 100, :font-size 40})))
+  (<>
+   "Socket brokwn! Click to retry."
+   {:font-family ui/font-fancy, :font-weight 100, :font-size 32})))
 
 (def style-body {:padding "8px 16px"})
 
