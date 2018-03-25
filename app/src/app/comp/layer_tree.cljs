@@ -18,7 +18,7 @@
    {:style (merge
             style/button
             {:background-color (hsl 240 80 80), :padding "0 8px", :margin "0px 0px"}),
-    :on-click (fn [e d! m!] (d! :focus path))}
+    :on-click (fn [e d! m!] (d! :session/focus path))}
    (<> (:layout tree))))
 
 (defn render-icon [tree path]
@@ -26,7 +26,7 @@
    {:style (merge
             style/button
             {:background-color (hsl 0 0 50), :padding "0 8px", :margin "0"}),
-    :on-click (fn [e d! m!] (d! :focus path))}
+    :on-click (fn [e d! m!] (d! :session/focus path))}
    (<> (str "icon"))))
 
 (defn render-space [tree path]
@@ -34,7 +34,7 @@
    {:style (merge
             style/button
             {:background-color (hsl 120 60 80), :padding "0 8px", :margin "0px"}),
-    :on-click (fn [e d! m!] (d! :focus path))}
+    :on-click (fn [e d! m!] (d! :session/focus path))}
    (<> "space")))
 
 (defn render-text [tree path]
@@ -45,7 +45,7 @@
              :padding "0 8px",
              :margin "0px 0px",
              :color (hsl 0 0 40)}),
-    :on-click (fn [e d! m!] (d! :focus path))}
+    :on-click (fn [e d! m!] (d! :session/focus path))}
    (<> (str "<>" (:content tree)))))
 
 (defn render-element [tree focus path]

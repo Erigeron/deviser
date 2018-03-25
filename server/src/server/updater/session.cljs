@@ -7,6 +7,8 @@
 (defn disconnect [db op-data session-id op-id op-time]
   (update db :sessions (fn [session] (dissoc session session-id))))
 
+(defn focus [db op-data sid op-id op-time] (assoc-in db [:sessions sid :focus] op-data))
+
 (defn remove-notification [db op-data session-id op-id op-time]
   (update-in
    db

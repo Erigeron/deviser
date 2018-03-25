@@ -24,6 +24,7 @@
    :id nil,
    :nickname nil,
    :router {:name :home, :data nil, :router nil},
-   :notifications []})
+   :notifications [],
+   :focus []})
 
 (def user {:name nil, :id nil, :nickname nil, :avatar nil, :password nil})
