@@ -16,7 +16,7 @@
 
 (defcomp
  comp-header
- (logged-in?)
+ (logged-in? count)
  (div
   {:style (merge
            ui/column-parted
@@ -38,4 +38,7 @@
     {:style (merge style/icon {:color (hsl 240 100 76)}),
      :on-click (fn [e d! m!] (.open js/window (str location.href "?page=preview")))}
     (comp-icon :ios-eye)))
-  (div {:style (merge style/icon), :on-click on-profile} (comp-icon :android-contact))))
+  (div
+   {:style ui/column}
+   (div {:style (merge ui/center {:font-size 16, :font-family ui/font-fancy})} (<> count))
+   (div {:style (merge style/icon), :on-click on-profile} (comp-icon :android-contact)))))

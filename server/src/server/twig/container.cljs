@@ -17,5 +17,6 @@
       {:user (twig-user (get-in db [:users (:user-id session)])),
        :router router,
        :tree (db :tree),
-       :focus (:focus session)}
+       :focus (:focus session),
+       :count (count (:sessions db))}
       nil))))

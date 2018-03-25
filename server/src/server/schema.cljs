@@ -10,8 +10,7 @@
   {:sessions {},
    :users {},
    :topics {},
-   :tree (merge element {:kind :box, :presets #{:fullscreen}}),
-   :focus []})
+   :tree (merge element {:kind :box, :presets #{:fullscreen}})})
 
 (def dev? (do ^boolean js/goog.DEBUG))
 

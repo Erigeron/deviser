@@ -29,15 +29,7 @@
        {:placeholder "Username",
         :value (:username state),
         :style ui/input,
-        :on-input (on-input state :username)}))
-     (=< nil 8)
-     (div
-      {}
-      (input
-       {:placeholder "Password",
-        :value (:password state),
-        :style ui/input,
-        :on-input (on-input state :password)})))
+        :on-input (on-input state :username)})))
     (=< nil 8)
     (div
      {:style ui/flex}

@@ -30,23 +30,25 @@
 (defcomp
  comp-container
  (states store)
- (let [state (:data states), session (:session store)]
+ (let [state (:data states), session (:session store), router (:router store)]
    (if (nil? store)
      (div {:style (merge ui/global ui/fullscreen ui/center)} (comp-offline))
-     (div
-      {:style (merge ui/global ui/fullscreen ui/row)}
-      (comp-header (:logged-in? store))
-      (div
-       {:style (merge ui/flex ui/column style-body)}
-       (if (:logged-in? store)
-         (let [router (:router store)]
+     (if (= :preview (:name router))
+       (comp-previewer (:tree store) (:focus store))
+       (div
+        {:style (merge ui/global ui/fullscreen ui/row)}
+        (comp-header (:logged-in? store) (:count store))
+        (div
+         {:style (merge ui/flex ui/column style-body)}
+         (if (:logged-in? store)
            (case (:name router)
              :profile (comp-profile (:user store))
              :home (comp-home states store)
-             :preview (comp-previewer (:tree store) (:focus store))
              :code (comp-code-reader (:tree store))
-             (<> (str "404 " (:name router)))))
-         (comp-login states)))
-      (when dev? (comp-inspect "Store" store {:bottom 30, :right 0, :max-width "100%"}))
-      (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
-      (when dev? (comp-reel (:reel-length store) {:bottom 0}))))))
+             (<> (str "404 " (:name router))))
+           (comp-login states)))
+        (when dev? (comp-inspect "Store" store {:bottom 30, :right 0, :max-width "100%"}))
+        (comp-msg-list
+         (get-in store [:session :notifications])
+         :session/remove-notification)
+        (when dev? (comp-reel (:reel-length store) {:bottom 0})))))))
