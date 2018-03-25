@@ -1,31 +1,23 @@
 {
-  "name": "cumulo-workflow",
+  "name": "Deviser",
   "version": "0.1.0",
-  "description": "Stack Workflow",
+  "description": "Deviser",
   "main": "index.js",
   "scripts": {
-    "cdn": "rsync -avr --progress dist/* tiye.me:cdn/cumulo-workflow",
-    "tiye": "rsync -r dist/{index.html,manifest.json} tiye.me:repo/Cumulo/workflow/",
-    "upload": "yarn cdn && yarn tiye",
-    "release": "shadow-cljs release browser",
     "watch": "shadow-cljs watch browser",
-    "compile-ssr": "shadow-cljs compile ssr",
-    "html-dev": "env=dev node target/ssr.js && cp entry/manifest.json target/",
-    "html": "node target/ssr.js && cp entry/manifest.json dist/",
-    "index.html": "yarn compile-ssr && yarn html-dev",
-    "del": "rm -rf dist/*",
-    "serve": "http-server dist",
-    "build": "yarn del && yarn release && yarn compile-ssr && yarn html"
+    "build": "shadow-cljs clj-run build.main/build",
+    "serve": "http-server dist -s",
+    "repl": "rlwrap shadow-cljs clj-repl"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:mvc-works/stack-workflow.git"
+    "url": "git@github.com:Erigron/deviser.git"
   },
   "author": "jiyinyiyong",
   "license": "MIT",
   "devDependencies": {
     "http-server": "^0.11.1",
-    "shadow-cljs": "^2.0.150"
+    "shadow-cljs": "^2.2.17"
   },
   "dependencies": {
     "url-parse": "^1.2.0"

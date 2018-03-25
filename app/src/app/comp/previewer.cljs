@@ -19,7 +19,7 @@
             :flex ui/flex
             :fullscreen ui/fullscreen
             :button ui/button
-            :clickable-text ui/clickable-text
+            :clickable-text ui/link
             {:background-color :red})))
        (apply merge)))
 

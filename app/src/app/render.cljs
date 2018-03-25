@@ -14,16 +14,14 @@
 (defn dev-page []
   (make-page
    ""
-   (merge
-    base-info
-    {:styles ["http://localhost:8100/main.css"], :scripts ["/lib.js" "/main.js"]})))
+   (merge base-info {:styles ["http://localhost:8100/main.css"], :scripts ["/main.js"]})))
 
 (def preview? (= "preview" js/process.env.prod))
 
 (defn prod-page []
   (let [html-content (make-string (comp-container {} nil))
         assets (read-string (slurp "dist/assets.edn"))
-        cdn (if preview? "" "http://cdn.tiye.me/cumulo-workflow/")
+        cdn (if preview? "" "http://cdn.tiye.me/deviser/")
         prefix-cdn #(str cdn %)]
     (make-page
      html-content

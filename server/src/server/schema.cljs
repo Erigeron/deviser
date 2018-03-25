@@ -1,7 +1,7 @@
 
 (ns server.schema )
 
-(def configs {:storage-key "/data/erigeron/deviser.edn", :port 5021})
+(def configs {:storage-key "/data/Erigeron/deviser.edn", :port 11002})
 
 (def element
   {:kind :box, :content nil, :layout :center, :presets #{}, :styles {}, :children {}})
@@ -12,6 +12,8 @@
    :topics {},
    :tree (merge element {:kind :box, :presets #{:fullscreen}}),
    :focus []})
+
+(def dev? (do ^boolean js/goog.DEBUG))
 
 (def notification {:id nil, :kind nil, :text nil})
 

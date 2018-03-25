@@ -13,7 +13,8 @@
             [app.comp.reel :refer [comp-reel]]
             [app.comp.home :refer [comp-home]]
             [app.comp.previewer :refer [comp-previewer]]
-            [app.comp.code-reader :refer [comp-code-reader]]))
+            [app.comp.code-reader :refer [comp-code-reader]]
+            [app.schema :refer [dev?]]))
 
 (def style-alert {:font-family "Josefin Sans", :font-weight 100, :font-size 40})
 
@@ -45,6 +46,6 @@
              :code (comp-code-reader (:tree store))
              (<> (str "404 " (:name router)))))
          (comp-login states)))
-      (comp-inspect "Store" store style-debugger)
+      (when dev? (comp-inspect "Store" store style-debugger))
       (comp-msg-list (get-in store [:session :notifications]) :session/remove-notification)
-      (comp-reel (:reel-length store) {})))))
+      (when dev? (comp-reel (:reel-length store) {}))))))
