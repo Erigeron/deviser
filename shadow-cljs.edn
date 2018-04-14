@@ -12,7 +12,7 @@
  :builds {:client {:output-dir "target/"
                     :asset-path "./"
                     :target :browser
-                    :modules {:main {:entries [app.client]}}
+                    :modules {:client {:entries [app.client]}}
                     :devtools {:after-load app.client/reload!
                                :http-root "target"
                                :http-port 7000}
@@ -22,4 +22,9 @@
           :page {:target :node-script
                 :output-to "target/page.js"
                 :main app.page/main!
-                :devtools {:after-load app.page/main!}}}}
+                :devtools {:after-load app.page/main!}}
+          :server {:target :node-script
+                   :output-to "target/server.js"
+                   :main app.server/main!
+                   :devtools {:after-load app.server/reload!}
+                   :release {:output-to "dist/server.js"}}}}

@@ -7,7 +7,7 @@
             [respo.comp.space :refer [=<]]
             [app.comp.layer-tree :refer [comp-layer-tree]]
             [app.comp.inspector :refer [comp-inspector]]
-            [app.util :refer [wrap-path]]))
+            [app.client-util :refer [wrap-path]]))
 
 (defcomp
  comp-home
