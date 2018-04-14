@@ -1,11 +1,11 @@
 
-(ns app.main
+(ns app.client
   (:require [respo.core :refer [render! clear-cache! realize-ssr!]]
             [respo.cursor :refer [mutate]]
             [app.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
             [verbosely.core :refer [log!]]
-            [app.network :refer [send! setup-socket!]]
+            [app.connection :refer [send! setup-socket!]]
             [app.schema :as schema]
             ("url-parse" :as parse)))
 

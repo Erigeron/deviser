@@ -1,8 +1,8 @@
 
-(ns server.updater.element
+(ns app.updater.element
   (:require [bisection-key.util :refer [key-append key-prepend key-after key-before]]
-            [server.schema :as schema]
-            [server.util :refer [wrap-path]]))
+            [app.schema :as schema]
+            [app.util :refer [wrap-path]]))
 
 (defn after-item [db op-data sid op-id op-time]
   (let [focus (get-in db [:sessions sid :focus])]

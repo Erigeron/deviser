@@ -1,7 +1,10 @@
 
-(ns server.schema )
+(ns app.schema )
 
-(def configs {:storage-key "/data/Erigeron/deviser.edn", :port 11002})
+(def configs
+  {:storage-key "/data/Erigeron/deviser.edn",
+   :local-storage-key "deviser-storage",
+   :port 11002})
 
 (def element
   {:kind :box, :content nil, :layout :center, :presets #{}, :styles {}, :children {}})
