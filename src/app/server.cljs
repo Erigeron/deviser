@@ -1,17 +1,21 @@
 
 (ns app.server
-  (:require [app.schema :as schema]
+  (:require [app.config :as config]
             [app.service :refer [run-server! sync-clients!]]
             [app.updater :refer [updater]]
             [cljs.reader :refer [read-string]]
-            [app.util :refer [try-verbosely! log-js!]]
+            [app.util :refer [log-js!]]
             [app.reel :refer [reel-updater refresh-reel reel-schema]]
             [verbosely.core :refer [log!]]
+            [app.schema :as schema]
+            [app.node-config :as node-config]
             ["fs" :as fs]
-            ["shortid" :as shortid]))
+            ["path" :as path]
+            ["shortid" :as shortid]
+            ["child_process" :as cp]))
 
 (def initial-db
-  (let [filepath (:storage-key schema/configs)]
+  (let [filepath (:storage-key node-config/env)]
     (if (fs/existsSync filepath)
       (do (println "Found storage.") (read-string (fs/readFileSync filepath "utf8")))
       schema/database)))
@@ -23,14 +27,27 @@
 (defn dispatch! [op op-data sid]
   (let [op-id (.generate shortid), op-time (.valueOf (js/Date.))]
     (log! "Dispatch!" (str op) op-data sid)
-    (try-verbosely!
+    (try
      (let [new-reel (reel-updater @*reel updater op op-data sid op-id op-time)]
-       (reset! *reel new-reel)))))
+       (reset! *reel new-reel))
+     (catch js/Error error (.error js/console error)))))
 
-(defn on-exit! [code]
-  (fs/writeFileSync (:storage-key schema/configs) (pr-str (assoc (:db @*reel) :sessions {})))
-  (println "Saving file on exit" code)
-  (.exit js/process))
+(defn persist-db! []
+  (let [file-content (pr-str (assoc (:db @*reel) :sessions {}))
+        now (js/Date.)
+        storage-path (:storage-path node-config/env)
+        backup-path (path/join
+                     js/__dirname
+                     "backups"
+                     (str (inc (.getMonth now)))
+                     (str (.getDate now) "-storage.edn"))]
+    (println "path" storage-path)
+    (fs/writeFileSync storage-path file-content)
+    (cp/execSync (str "mkdir -p " (path/dirname backup-path)))
+    (fs/writeFileSync backup-path file-content)
+    (println "Saved file in" storage-path "and saved backup in" backup-path)))
+
+(defn on-exit! [code] (persist-db!) (println "Saving file on exit" code) (.exit js/process))
 
 (defn proxy-dispatch! [& args] "Make dispatch hot relodable." (apply dispatch! args))
 
@@ -40,9 +57,10 @@
   (js/setTimeout render-loop! 300))
 
 (defn main! []
-  (run-server! proxy-dispatch! (:port schema/configs))
+  (run-server! proxy-dispatch! (:port config/site))
   (render-loop!)
   (.on js/process "SIGINT" on-exit!)
+  (js/setInterval #(persist-db!) (* 60 1000 10))
   (println "Server started."))
 
 (defn reload! []

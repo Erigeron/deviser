@@ -1,7 +1,7 @@
 
 (ns app.comp.profile
   (:require [hsl.core :refer [hsl]]
-            [app.schema :as schema]
+            [app.config :as config]
             [respo-ui.core :as ui]
             [respo-ui.colors :as colors]
             [respo.macros :refer [defcomp <> span div a]]
@@ -22,5 +22,5 @@
             :padding "0 8px"},
     :on-click (fn [e d! m!]
       (d! :user/log-out nil)
-      (.removeItem js/localStorage (:local-storage-key schema/configs)))}
+      (.removeItem js/localStorage (:storage-key config/site)))}
    (<> "Log out"))))

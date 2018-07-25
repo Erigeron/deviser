@@ -6,7 +6,7 @@
             [cljs.reader :refer [read-string]]
             [verbosely.core :refer [log!]]
             [app.connection :refer [send! setup-socket!]]
-            [app.schema :as schema]
+            [app.config :as config]
             ("url-parse" :as parse)))
 
 (declare dispatch!)
@@ -26,7 +26,7 @@
     (if (= initial-page "preview") (dispatch! :router/change {:name :preview}))))
 
 (defn simulate-login! []
-  (let [raw (.getItem js/localStorage (:local-storage-key schema/configs))]
+  (let [raw (.getItem js/localStorage (:storage-key config/site))]
     (if (some? raw)
       (do (println "Found storage.") (dispatch! :user/log-in (read-string raw)))
       (do (println "Found no storage.")))))
@@ -41,7 +41,7 @@
 (defn connect! [cb!]
   (setup-socket!
    *store
-   {:url (str "ws://" (.-hostname js/location) ":" (:port schema/configs)),
+   {:url (str "ws://" (.-hostname js/location) ":" (:port config/site)),
     :on-close! (fn [event] (reset! *store nil) (.error js/console "Lost connection!")),
     :on-open! (fn [event] (simulate-login!) (cb!))}))
 

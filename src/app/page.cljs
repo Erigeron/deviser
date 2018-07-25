@@ -3,34 +3,34 @@
   (:require [respo.render.html :refer [make-string]]
             [shell-page.core :refer [make-page spit slurp]]
             [app.comp.container :refer [comp-container]]
-            [cljs.reader :refer [read-string]]))
+            [cljs.reader :refer [read-string]]
+            [app.config :as config]
+            [app.util :refer [get-env!]]))
 
 (def base-info
-  {:title "Deviser",
-   :icon "http://cdn.tiye.me/logo/erigeron.png",
+  {:title (:title config/site),
+   :icon (:icon config/site),
    :ssr nil,
    :inline-styles [(slurp "entry/main.css")]})
 
 (defn dev-page []
-  (make-page
-   ""
-   (merge base-info {:styles ["http://localhost:8100/main.css"], :scripts ["/client.js"]})))
+  (make-page "" (merge base-info {:styles [(:dev-ui config/site)], :scripts ["/client.js"]})))
 
-(def preview? (= "preview" js/process.env.prod))
+(def local-bundle? (= "\"local-bundle" (get-env! "mode")))
 
 (defn prod-page []
   (let [html-content (make-string (comp-container {} nil))
         assets (read-string (slurp "dist/assets.edn"))
-        cdn (if preview? "" "http://cdn.tiye.me/deviser/")
+        cdn (if local-bundle? "" (:cdn-url config/site))
         prefix-cdn #(str cdn %)]
     (make-page
      html-content
      (merge
       base-info
-      {:styles ["http://cdn.tiye.me/favored-fonts/main.css"],
+      {:styles [(:release-ui config/site)],
        :scripts (map #(-> % :output-name prefix-cdn) assets)}))))
 
 (defn main! []
-  (if (= js/process.env.env "dev")
-    (spit "target/index.html" (dev-page))
-    (spit "dist/index.html" (prod-page))))
+  (if (contains? config/bundle-builds (get-env! "mode"))
+    (spit "dist/index.html" (prod-page))
+    (spit "target/index.html" (dev-page))))
