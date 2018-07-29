@@ -6,7 +6,6 @@
             [cljs.reader :refer [read-string]]
             [app.util :refer [log-js!]]
             [app.reel :refer [reel-updater refresh-reel reel-schema]]
-            [verbosely.core :refer [log!]]
             [app.schema :as schema]
             [app.node-config :as node-config]
             ["fs" :as fs]
@@ -15,7 +14,7 @@
             ["child_process" :as cp]))
 
 (def initial-db
-  (let [filepath (:storage-key node-config/env)]
+  (let [filepath (:storage-path node-config/env)]
     (if (fs/existsSync filepath)
       (do (println "Found storage.") (read-string (fs/readFileSync filepath "utf8")))
       schema/database)))
@@ -26,7 +25,7 @@
 
 (defn dispatch! [op op-data sid]
   (let [op-id (.generate shortid), op-time (.valueOf (js/Date.))]
-    (log! "Dispatch!" (str op) op-data sid)
+    (println "Dispatch!" (str op) op-data sid)
     (try
      (let [new-reel (reel-updater @*reel updater op op-data sid op-id op-time)]
        (reset! *reel new-reel))

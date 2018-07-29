@@ -3,7 +3,6 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
-            [verbosely.core :refer [log!]]
             [respo.core :refer [create-element]]
             [app.style :as style]))
 

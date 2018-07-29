@@ -4,7 +4,6 @@
             [respo.cursor :refer [mutate]]
             [app.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
-            [verbosely.core :refer [log!]]
             [app.connection :refer [send! setup-socket!]]
             [app.config :as config]
             ("url-parse" :as parse)))
