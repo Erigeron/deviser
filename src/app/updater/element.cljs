@@ -2,7 +2,8 @@
 (ns app.updater.element
   (:require [bisection-key.util :refer [key-append key-prepend key-after key-before]]
             [app.schema :as schema]
-            [app.util :refer [wrap-path]]))
+            [app.util :refer [wrap-path]]
+            [verbosely.core :refer [log!]]))
 
 (defn after-item [db op-data sid op-id op-time]
   (let [focus (get-in db [:sessions sid :focus])]
@@ -78,7 +79,7 @@
                (update target-node :children (fn [children] (dissoc children (peek focus))))))
             (assoc :focus new-focus))))))
 
-(defn set-content [db op-data sid op-id op-data]
+(defn set-content [db op-data sid op-id op-time]
   (let [focus (get-in db [:sessions sid :focus])]
     (assoc-in db (concat '(:tree) (wrap-path focus) '(:content)) op-data)))
 

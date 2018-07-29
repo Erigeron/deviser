@@ -6,35 +6,32 @@
             [respo.comp.space :refer [=<]]
             [verbosely.core :refer [verbosely!]]
             [app.style :as style]
-            [app.comp.color-picker :refer [comp-color-picker]]))
+            [app.comp.color-picker :refer [comp-color-picker]]
+            [respo-alerts.comp.alerts :refer [comp-prompt]]))
 
 (defcomp
  comp-text-inspector
  (states content color)
- (let [state (or (:data states) {:text ""})]
+ (div
+  {:style {}}
+  (div {:style style/area-heading} (<> "Text"))
+  (div
+   {}
+   (cursor->
+    :content
+    comp-prompt
+    states
+    {:trigger (<> content), :text "New content", :initial content}
+    (fn [result d! m!] (d! :element/content result))))
+  (=< nil 8)
+  (div
+   {}
    (div
-    {:style {}}
-    (div {:style style/area-heading} (<> "Text"))
-    (div {} (<> content))
-    (div
-     {}
-     (textarea
-      {:style style/textarea,
-       :value (:text state),
-       :placeholder "text content",
-       :on-input (fn [e d! m!] (m! (assoc state :text (:value e))))})
-     (button
-      {:style style/button, :on-click (fn [e d! m!] (d! :element/content (:text state)))}
-      (<> "change")))
-    (=< nil 8)
-    (div
-     {}
-     (div
-      {}
-      (<> "color: ")
-      (cursor->
-       :color-picker
-       comp-color-picker
-       states
-       color
-       (fn [color d!] (d! :element/change-style [:color color]))))))))
+    {}
+    (<> "color: ")
+    (cursor->
+     :color-picker
+     comp-color-picker
+     states
+     color
+     (fn [color d!] (d! :element/change-style [:color color])))))))

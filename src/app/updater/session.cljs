@@ -9,8 +9,8 @@
 
 (defn focus [db op-data sid op-id op-time] (assoc-in db [:sessions sid :focus] op-data))
 
-(defn remove-notification [db op-data session-id op-id op-time]
+(defn remove-message [db op-data session-id op-id op-time]
   (update-in
    db
-   [:sessions session-id :notifications]
-   (fn [notifications] (subvec notifications 0 op-data))))
+   [:sessions session-id :messages]
+   (fn [messages] (dissoc messages (:id op-data)))))
