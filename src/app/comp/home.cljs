@@ -3,7 +3,6 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo.macros :refer [defcomp cursor-> <> div button textarea span]]
-            [verbosely.core :refer [log!]]
             [respo.comp.space :refer [=<]]
             [app.comp.layer-tree :refer [comp-layer-tree]]
             [app.comp.inspector :refer [comp-inspector]]

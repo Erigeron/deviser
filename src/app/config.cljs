@@ -17,5 +17,5 @@
    :release-ui "http://cdn.tiye.me/favored-fonts/main.css",
    :cdn-url "http://cdn.tiye.me/deviser/",
    :cdn-folder "tiye.me:cdn/deviser",
-   :upload-folder "tiye.me:repo/Erigeron/workflow/",
+   :upload-folder "tiye.me:repo/Erigeron/deviser/",
    :server-folder "tiye.me:servers/deviser"})

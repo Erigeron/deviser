@@ -4,7 +4,6 @@
             [respo.cursor :refer [mutate]]
             [app.comp.container :refer [comp-container]]
             [cljs.reader :refer [read-string]]
-            [verbosely.core :refer [log!]]
             [app.connection :refer [send! setup-socket!]]
             [app.config :as config]
             ("url-parse" :as parse)))
@@ -32,11 +31,10 @@
       (do (println "Found no storage.")))))
 
 (defn dispatch! [op op-data]
-  (log! "Dispatch" op op-data)
   (case op
     :states (reset! *states ((mutate op-data) @*states))
     :effect/connect (connect! try-preview!)
-    (send! op op-data)))
+    (do (println "Dispatch" op op-data) (send! op op-data))))
 
 (defn connect! [cb!]
   (setup-socket!
@@ -48,7 +46,7 @@
 (def mount-target (.querySelector js/document ".app"))
 
 (defn render-app! [renderer]
-  (renderer mount-target (comp-container @*states @*store) dispatch!))
+  (renderer mount-target (comp-container @*states @*store) #(dispatch! %1 %2)))
 
 (def ssr? (some? (.querySelector js/document "meta.respo-ssr")))
 

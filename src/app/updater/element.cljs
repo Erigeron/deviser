@@ -76,9 +76,9 @@
              (cons :tree (wrap-path new-focus))
              (fn [target-node]
                (update target-node :children (fn [children] (dissoc children (peek focus))))))
-            (assoc :focus new-focus))))))
+            (assoc-in [:sessions sid :focus] new-focus))))))
 
-(defn set-content [db op-data sid op-id op-data]
+(defn set-content [db op-data sid op-id op-time]
   (let [focus (get-in db [:sessions sid :focus])]
     (assoc-in db (concat '(:tree) (wrap-path focus) '(:content)) op-data)))
 
