@@ -7,32 +7,38 @@
             [verbosely.core :refer [log!]]
             [app.style :as style]
             [clojure.string :as s]
-            [keycode.core :as keycode]))
+            [respo-alerts.comp.alerts :refer [comp-prompt]]))
+
+(defn parse-styles [code styles]
+  (let [[k v] (map s/trim (s/split code ":"))]
+    (if (s/blank? v) (dissoc styles (keyword k)) (assoc styles (keyword k) v))))
 
 (defcomp
  comp-styles
  (states styles)
- (let [state (or (:data states) "")]
-   (div
-    {}
-    (div {:style style/area-heading} (<> "Styles"))
-    (list->
-     {:style {:font-family "Menlo,monospace", :font-size 12, :line-height "20px"}}
-     (->> styles (map (fn [[k v]] [k (div {} (<> (str (name k) ": " v)))]))))
-    (div
-     {}
-     (input
-      {:style style/input,
-       :value state,
-       :placeholder "property:value",
-       :on-input (fn [e d! m!] (m! (:value e))),
-       :on-keydown (fn [e d! m!]
-         (if (and (= keycode/return (:key-code e)) (not (s/blank? state)))
-           (let [code state
-                 [k v] (map s/trim (s/split code ":"))
-                 new-styles (if (s/blank? v)
-                              (dissoc styles (keyword k))
-                              (assoc styles (keyword k) v))]
-             (log! new-styles)
-             (d! :element/styles new-styles)
-             (m! nil))))})))))
+ (div
+  {}
+  (div {:style style/area-heading} (<> "Styles"))
+  (list->
+   {:style {:font-family "Menlo,monospace", :font-size 12, :line-height "20px"}}
+   (->> styles
+        (map
+         (fn [[k v]]
+           [k
+            (cursor->
+             k
+             comp-prompt
+             states
+             {:trigger (div {} (<> (str (name k) ": " v))),
+              :text "Edit style:",
+              :initial v,
+              :style {:display :block}}
+             (fn [result d! m!] (d! :element/styles (assoc styles k result))))]))))
+  (cursor->
+   :add
+   comp-prompt
+   states
+   {:trigger (button {:style style/button, :inner-text "Set"}),
+    :text "New styles in `property:value`:",
+    :style {:display :block}}
+   (fn [result d! m!] (d! :element/styles (parse-styles result styles))))))
