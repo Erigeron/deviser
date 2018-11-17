@@ -3361,7 +3361,7 @@
                       :type :expr, :by "root", :at 1521970278851, :id "SJ1u3kHcM"
                       :data {
                        "D" {:type :leaf, :by "root", :at 1521970279565, :text "str", :id "rkgJun1r5M"}
-                       "T" {:type :leaf, :by "root", :at 1521970277906, :text "location.href", :id "rJ4U21Bcz"}
+                       "T" {:type :leaf, :by "root", :at 1542470745646, :text "js/location.href", :id "rJ4U21Bcz"}
                        "j" {:type :leaf, :by "root", :at 1521970293198, :text "|?page=preview", :id "H1Zd2JHqz"}
                       }
                      }

@@ -36,7 +36,7 @@
    (=< nil 8)
    (div
     {:style (merge style/icon {:color (hsl 240 100 76)}),
-     :on-click (fn [e d! m!] (.open js/window (str location.href "?page=preview")))}
+     :on-click (fn [e d! m!] (.open js/window (str js/location.href "?page=preview")))}
     (comp-icon :ios-eye)))
   (div
    {:style ui/column}
