@@ -3,7 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo-ui.colors :as colors]
-            [respo.macros :refer [defcomp <> action-> div span button]]
+            [respo.core :refer [defcomp <> action-> div span button]]
             [respo.comp.inspect :refer [comp-inspect]]
             [respo.comp.space :refer [=<]]
             [app.comp.header :refer [comp-header]]

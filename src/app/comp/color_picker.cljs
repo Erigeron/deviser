@@ -2,8 +2,7 @@
 (ns app.comp.color-picker
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
-            [verbosely.core :refer [verbosely!]]))
+            [respo.core :refer [defcomp cursor-> list-> <> div button textarea span]]))
 
 (def default-colors
   {:theme ["red" "green" "blue" "black" "white"],

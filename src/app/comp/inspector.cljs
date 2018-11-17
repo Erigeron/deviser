@@ -2,7 +2,7 @@
 (ns app.comp.inspector
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros :refer [defcomp cursor-> <> div button textarea span]]
+            [respo.core :refer [defcomp cursor-> <> div button textarea span]]
             [app.comp.kind-tabs :refer [comp-kind-tabs]]
             [app.comp.box-inspector :refer [comp-box-inspector]]
             [app.comp.text-inspector :refer [comp-text-inspector]]

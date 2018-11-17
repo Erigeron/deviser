@@ -3,7 +3,7 @@
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
             [respo-ui.colors :as colors]
-            [respo.macros :refer [defcomp <> span div button]]
+            [respo.core :refer [defcomp <> span div button]]
             [app.style :as style]))
 
 (defcomp

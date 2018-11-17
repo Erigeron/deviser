@@ -2,10 +2,9 @@
 (ns app.comp.presets
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros
+            [respo.core
              :refer
              [defcomp cursor-> list-> <> div button textarea span action->]]
-            [verbosely.core :refer [verbosely!]]
             [app.style :as style]))
 
 (def default-presets (list :flex :button :link))

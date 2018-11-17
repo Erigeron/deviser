@@ -2,10 +2,9 @@
 (ns app.comp.kind-tabs
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros
+            [respo.core
              :refer
              [defcomp cursor-> list-> <> div button textarea span mutation->]]
-            [verbosely.core :refer [verbosely!]]
             [respo.comp.space :refer [=<]]
             [respo-ui.comp.icon :refer [comp-icon]]))
 

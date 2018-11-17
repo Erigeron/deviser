@@ -2,11 +2,10 @@
 (ns app.comp.layer-tree
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros
+            [respo.core
              :refer
              [defcomp cursor-> action-> list-> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
-            [verbosely.core :refer [verbosely!]]
             [app.style :as style]))
 
 (defn render-action [guide action]

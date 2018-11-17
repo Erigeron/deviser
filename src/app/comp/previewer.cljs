@@ -2,7 +2,7 @@
 (ns app.comp.previewer
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros :refer [defcomp cursor-> list-> <> div button textarea span]]
+            [respo.core :refer [defcomp cursor-> list-> <> div button textarea span]]
             [respo.core :refer [create-element]]
             [app.style :as style]))
 

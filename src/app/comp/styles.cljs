@@ -2,9 +2,8 @@
 (ns app.comp.styles
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.macros :refer [defcomp cursor-> list-> <> div button input span]]
+            [respo.core :refer [defcomp cursor-> list-> <> div button input span]]
             [respo.comp.space :refer [=<]]
-            [verbosely.core :refer [log!]]
             [app.style :as style]
             [clojure.string :as s]
             [respo-alerts.comp.alerts :refer [comp-prompt]]))
