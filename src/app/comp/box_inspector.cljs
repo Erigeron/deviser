@@ -6,7 +6,7 @@
             [app.style :as style]
             [app.comp.color-picker :refer [comp-color-picker]]))
 
-(def layouts [:row :column :center :row-center :row-parted :column-parted])
+(def layouts [:row :column :center :row-center :row-middle :row-parted :column-parted])
 
 (defcomp
  comp-box-inspector
@@ -24,9 +24,8 @@
             (div
              {:style (merge
                       style/button
-                      {:background-color (if (= current-layout layout)
-                         (hsl 240 90 80)
-                         (hsl 240 60 90))}),
+                      (if (= current-layout layout)
+                        {:background-color (hsl 200 80 70), :color :white})),
               :on-click (fn [e d! m!] (d! :element/layout layout))}
              (<> (name layout)))]))))
   (div

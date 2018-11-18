@@ -64,6 +64,7 @@
               :row ui/row
               :center ui/center
               :row-center ui/row-center
+              :row-middle ui/row-middle
               :row-parted ui/row-parted
               :column-parted ui/column-parted
               {:background-color :red})

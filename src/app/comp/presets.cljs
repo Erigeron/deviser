@@ -26,10 +26,8 @@
              {:style (merge
                       style/button
                       (if (contains? presets preset)
-                        {}
-                        {:background-color :white,
-                         :border (str "1px solid " (hsl 0 0 70)),
-                         :color (hsl 0 0 70)})),
+                        {:background-color (hsl 200 80 70), :color :white}
+                        {})),
               :on-click (action->
                          :element/presets
                          (if (contains? presets preset)

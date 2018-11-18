@@ -20,7 +20,7 @@
     :content
     comp-prompt
     states
-    {:trigger (<> content), :text "New content", :initial content}
+    {:trigger (<> (or content "nothing")), :text "New content", :initial content}
     (fn [result d! m!] (d! :element/content result))))
   (=< nil 8)
   (div

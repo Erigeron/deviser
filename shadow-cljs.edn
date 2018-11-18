@@ -2,12 +2,13 @@
 {:source-paths ["src" "cli"]
  :dependencies [[mvc-works/hsl          "0.1.2"]
                 [mvc-works/shell-page   "0.1.9"]
-                [respo                  "0.10.1"]
+                [respo                  "0.10.2"]
                 [respo/ui               "0.3.10"]
                 [respo/message          "0.3.4"]
                 [respo/alerts           "0.3.8"]
                 [cirru/bisection-key    "0.1.5"]
-                [cumulo/recollect       "0.4.3"]]
+                [cumulo/recollect       "0.5.0"]
+                [org.clojure/core.incubator "0.1.4"]]
  :builds {:client {:output-dir "target/"
                     :asset-path "./"
                     :target :browser

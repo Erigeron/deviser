@@ -5,10 +5,7 @@
   {:kind :box, :content nil, :layout :center, :presets #{}, :styles {}, :children {}})
 
 (def database
-  {:sessions {},
-   :users {},
-   :topics {},
-   :tree (merge element {:kind :box, :presets #{:fullscreen}})})
+  {:sessions {}, :users {}, :tree (merge element {:kind :box, :presets #{:fullscreen}})})
 
 (def notification {:id nil, :kind nil, :text nil})
 
