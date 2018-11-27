@@ -13,5 +13,5 @@
  (states store)
  (div
   {:style (merge ui/flex ui/row)}
-  (comp-layer-tree (:tree store) (:focus store))
+  (comp-layer-tree (:tree store) (:focus store) (:focuses store))
   (comp-inspector states (get-in (:tree store) (wrap-path (:focus store))))))

@@ -6,7 +6,8 @@
              :refer
              [defcomp cursor-> action-> list-> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
-            [app.style :as style]))
+            [app.style :as style])
+  (:require-macros [clojure.core.strint :refer [<<]]))
 
 (defn render-action [guide action]
   (button
@@ -74,12 +75,13 @@
     :on-click (action-> :session/focus path)}
    (<> (str "<>" (:content tree)))))
 
-(defn render-element [tree focus path]
+(defn render-element [tree focus focuses path]
   (let [focused? (= focus path)]
     (div
      {:style (merge
-              {:border-left (str "1px solid " (if focused? (hsl 60 90 30) (hsl 60 90 90)))})}
-     (let [kind (:kind tree)] )
+              {:border-left (<< "2px solid ~(hsl 60 90 90)"), :padding-left 4}
+              (if (contains? focuses path) {:border-left (<< "2px solid ~(hsl 60 90 50)")})
+              (if focused? {:border-left (<< "2px solid ~(hsl 60 90 40)")}))}
      (case (:kind tree)
        :box (render-box tree path)
        :text (render-text tree path)
@@ -91,15 +93,15 @@
       :div
       {:style {:padding "0 0 0 24px"}}
       (->> (:children tree)
-           (map (fn [[k v]] [k (render-element v focus (conj path k))]))
+           (map (fn [[k v]] [k (render-element v focus focuses (conj path k))]))
            (sort-by first))))))
 
 (defcomp
  comp-layer-tree
- (tree focus)
+ (tree focus focuses)
  (div
   {:style (merge ui/flex ui/column {:background-color (hsl 0 0 100)})}
   (=< nil 8)
   (div
    {:style (merge ui/flex {:overflow :auto, :padding "4px 8px"})}
-   (render-element tree focus []))))
+   (render-element tree focus focuses []))))

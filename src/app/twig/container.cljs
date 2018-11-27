@@ -18,6 +18,6 @@
        :router router,
        :tree (db :tree),
        :focus (:focus session),
-       :focuses (->> db :sessions (map (fn [[k v]] [k (:focus v)])) (into {})),
+       :focuses (->> db :sessions (map (fn [[k v]] (:focus v))) set),
        :count (count (:sessions db))}
       nil))))
