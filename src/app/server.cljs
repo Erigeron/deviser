@@ -5,7 +5,7 @@
             [app.updater :refer [updater]]
             [cljs.reader :refer [read-string]]
             [app.util :refer [log-js!]]
-            [app.reel :refer [reel-updater refresh-reel reel-schema]]
+            [cumulo-reel.reel :refer [reel-reducer refresh-reel reel-schema]]
             [app.schema :as schema]
             [app.node-config :as node-config]
             ["fs" :as fs]
@@ -27,7 +27,7 @@
   (let [op-id (.generate shortid), op-time (.valueOf (js/Date.))]
     (println "Dispatch!" (str op) op-data sid)
     (try
-     (let [new-reel (reel-updater @*reel updater op op-data sid op-id op-time)]
+     (let [new-reel (reel-reducer @*reel updater op op-data sid op-id op-time)]
        (reset! *reel new-reel))
      (catch js/Error error (.error js/console error)))))
 

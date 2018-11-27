@@ -10,11 +10,11 @@
             [app.comp.profile :refer [comp-profile]]
             [app.comp.login :refer [comp-login]]
             [respo-message.comp.messages :refer [comp-messages]]
-            [app.comp.reel :refer [comp-reel]]
             [app.comp.home :refer [comp-home]]
             [app.comp.previewer :refer [comp-previewer]]
             [app.comp.code-reader :refer [comp-code-reader]]
-            [app.config :refer [dev?]]))
+            [app.config :refer [dev?]]
+            [cumulo-reel.comp.reel :refer [comp-reel]]))
 
 (defcomp
  comp-offline

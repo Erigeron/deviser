@@ -5,9 +5,11 @@
                 [respo                  "0.10.2"]
                 [respo/ui               "0.3.10"]
                 [respo/message          "0.3.4"]
-                [respo/alerts           "0.3.8"]
+                [respo/alerts           "0.3.10"]
                 [cirru/bisection-key    "0.1.5"]
                 [cumulo/recollect       "0.5.0"]
+                [cumulo/reel            "0.1.0"]
+                [respo/inflow-popup     "0.2.6"]
                 [org.clojure/core.incubator "0.1.4"]]
  :builds {:client {:output-dir "target/"
                     :asset-path "./"
@@ -15,8 +17,7 @@
                     :modules {:client {:init-fn app.client/main!}}
                     :devtools {:after-load app.client/reload!
                                :http-root "target"
-                               :http-port 7000
-                               :loader-mode :eval}
+                               :http-port 7000}
                     :release {:output-dir "dist/"}
                               :module-hash-names 8
                               :build-options {:manifest-name "assets.edn"}}

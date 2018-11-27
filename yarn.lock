@@ -671,10 +671,10 @@ shadow-cljs-jar@1.3.0:
   resolved "https://registry.yarnpkg.com/shadow-cljs-jar/-/shadow-cljs-jar-1.3.0.tgz#e25c4fa57c0b405096250884b164c112654a06a3"
   integrity sha512-KReNVgFVM2ZPPGCP8rsCPqtlee/+SwXyoeEqbAXBO7jlpoNnNee2x4fiRg/Pr/vXGEkV/Ez5l4qdNSU1Na+1Jg==
 
-shadow-cljs@^2.7.4:
-  version "2.7.4"
-  resolved "https://registry.yarnpkg.com/shadow-cljs/-/shadow-cljs-2.7.4.tgz#180fa08074191d1b6cad36a176f63e8587324f88"
-  integrity sha512-0ZzGarOQDp+BDP+1un5Vu3pJHqWoaNQHO6/A5wxv7JUwDlLMMXAPOT4Ffyvbc4MQiH+5bIff9Al7+kIgHk4H+Q==
+shadow-cljs@^2.7.6:
+  version "2.7.6"
+  resolved "https://registry.yarnpkg.com/shadow-cljs/-/shadow-cljs-2.7.6.tgz#ac5cd9898e14c2b9fd7f4e8abf81bc3abd8372e3"
+  integrity sha512-hk9dtt3mLkLQzu2YJG+T2/8YyevRNYtGZTGjTrGCUzjLaqKHJInJELY16vU2W17Kq/u9tCsPV0Y+bbnHRv52uw==
   dependencies:
     mkdirp "^0.5.1"
     node-libs-browser "^2.0.0"
@@ -832,10 +832,10 @@ ws@^3.0.0:
     safe-buffer "~5.1.0"
     ultron "~1.1.0"
 
-ws@^6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.1.tgz#3f5a17e51059272dc18cf039d3ef29eee5d3fdc6"
-  integrity sha512-tfSg0NBK1w9FkVhIftPp2lWPoFu3AInndGyydLPTNSIA4o1V7GveE2fCTF7kFmHZ/+NGVObBptvFXwzF7ALXDQ==
+ws@^6.1.2:
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-6.1.2.tgz#3cc7462e98792f0ac679424148903ded3b9c3ad8"
+  integrity sha512-rfUqzvz0WxmSXtJpPMX2EeASXabOrSMk1ruMOV3JBTBjo4ac2lDjGGsbQSyxj8Odhw5fBib8ZKEjDNvgouNKYw==
   dependencies:
     async-limiter "~1.0.0"
 
