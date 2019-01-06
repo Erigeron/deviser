@@ -1,16 +1,23 @@
 
-(ns app.config (:require [app.util :refer [get-env!]]))
+(ns app.config )
 
-(def bundle-builds #{"release" "local-bundle"})
+(def cdn?
+  (cond
+    (exists? js/window) false
+    (exists? js/process) (= "true" js/process.env.cdn)
+    :else false))
 
 (def dev?
-  (if (exists? js/window)
-    (do ^boolean js/goog.DEBUG)
-    (not (contains? bundle-builds (get-env! "mode")))))
+  (let [debug? (do ^boolean js/goog.DEBUG)]
+    (if debug?
+      (cond
+        (exists? js/window) true
+        (exists? js/process) (not= "true" js/process.env.release)
+        :else true)
+      false)))
 
 (def site
-  {:storage-key "deviser-storage",
-   :port 11002,
+  {:port 11002,
    :title "Deviser",
    :icon "http://cdn.tiye.me/logo/erigeron.png",
    :dev-ui "http://localhost:8100/main.css",
@@ -18,4 +25,7 @@
    :cdn-url "http://cdn.tiye.me/deviser/",
    :cdn-folder "tiye.me:cdn/deviser",
    :upload-folder "tiye.me:repo/Erigeron/deviser/",
-   :server-folder "tiye.me:servers/deviser"})
+   :server-folder "tiye.me:servers/deviser",
+   :theme "#eeeeff",
+   :storage-key "deviser-storage",
+   :storage-file "storage.edn"})
