@@ -2,8 +2,7 @@
 (ns app.comp.container
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo-ui.colors :as colors]
-            [respo.core :refer [defcomp <> action-> div span button]]
+            [respo.core :refer [defcomp <> >> div span button]]
             [respo.comp.inspect :refer [comp-inspect]]
             [respo.comp.space :refer [=<]]
             [app.comp.header :refer [comp-header]]
@@ -20,7 +19,7 @@
  comp-offline
  ()
  (span
-  {:style {:cursor :pointer}, :on-click (action-> :effect/connect nil)}
+  {:style {:cursor :pointer}, :on-click (fn [e d!] (d! :effect/connect nil))}
   (<>
    "Socket brokwn! Click to retry."
    {:font-family ui/font-fancy, :font-weight 100, :font-size 32})))

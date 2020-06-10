@@ -2,9 +2,7 @@
 (ns app.comp.presets
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core
-             :refer
-             [defcomp cursor-> list-> <> div button textarea span action->]]
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]
             [app.style :as style]))
 
 (def default-presets (list :flex :button :link))
@@ -28,9 +26,8 @@
                       (if (contains? presets preset)
                         {:background-color (hsl 200 80 70), :color :white}
                         {})),
-              :on-click (action->
-                         :element/presets
-                         (if (contains? presets preset)
-                           (disj presets preset)
-                           (conj presets preset)))}
+              :on-click (fn [e d!]
+                (d!
+                 :element/presets
+                 (if (contains? presets preset) (disj presets preset) (conj presets preset))))}
              (<> (name preset)))]))))))

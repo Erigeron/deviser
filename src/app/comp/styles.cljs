@@ -2,11 +2,11 @@
 (ns app.comp.styles
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> list-> <> div button input span]]
+            [respo.core :refer [defcomp >> list-> <> div button input span]]
             [respo.comp.space :refer [=<]]
             [app.style :as style]
             [clojure.string :as s]
-            [respo-alerts.comp.alerts :refer [comp-prompt]]))
+            [respo-alerts.core :refer [comp-prompt]]))
 
 (defn parse-styles [code styles]
   (let [[k v] (map s/trim (s/split code ":"))]
@@ -24,19 +24,15 @@
         (map
          (fn [[k v]]
            [k
-            (cursor->
-             k
-             comp-prompt
-             states
+            (comp-prompt
+             (>> states k)
              {:trigger (div {} (<> (str (name k) ": " v))),
               :text "Edit style:",
               :initial v,
               :style {:display :block}}
              (fn [result d! m!] (d! :element/styles (assoc styles k result))))]))))
-  (cursor->
-   :add
-   comp-prompt
-   states
+  (comp-prompt
+   (>> states :add)
    {:trigger (button {:style style/button, :inner-text "Set"}),
     :text "New styles in `property:value`:",
     :style {:display :block}}

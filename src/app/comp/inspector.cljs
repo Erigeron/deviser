@@ -2,7 +2,7 @@
 (ns app.comp.inspector
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> <> div button textarea span]]
+            [respo.core :refer [defcomp >> <> div button textarea span]]
             [app.comp.kind-tabs :refer [comp-kind-tabs]]
             [app.comp.box-inspector :refer [comp-box-inspector]]
             [app.comp.text-inspector :refer [comp-text-inspector]]
@@ -16,7 +16,7 @@
  (states element)
  (div
   {:style ui/flex}
-  (cursor-> :tabs comp-kind-tabs states (:kind element) (not (empty? (:children element))))
+  (comp-kind-tabs (>> states :tabs) (:kind element) (not (empty? (:children element))))
   (div
    {:style {}}
    (case (:kind element)
@@ -30,4 +30,4 @@
      :space (comp-space-inspector (:styles element))
      (<> "Unknown"))
    (comp-presets (:presets element))
-   (cursor-> :styles comp-styles states (:styles element)))))
+   (comp-styles (>> states :styles) (:styles element)))))

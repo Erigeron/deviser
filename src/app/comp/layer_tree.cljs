@@ -2,9 +2,7 @@
 (ns app.comp.layer-tree
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core
-             :refer
-             [defcomp cursor-> action-> list-> <> div button textarea span]]
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
             [app.style :as style])
   (:require-macros [clojure.core.strint :refer [<<]]))
@@ -42,7 +40,7 @@
              :padding "0 8px",
              :margin "0px 0px",
              :color (hsl 240 80 60)}),
-    :on-click (action-> :session/focus path)}
+    :on-click (fn [e d!] (d! :session/focus path))}
    (<> (:layout tree))))
 
 (defn render-icon [tree path]
@@ -53,7 +51,7 @@
              :padding "0 8px",
              :margin "0",
              :color (hsl 0 0 80)}),
-    :on-click (action-> :session/focus path)}
+    :on-click (fn [e d!] (d! :session/focus path))}
    (<> (str "icon"))))
 
 (defn render-space [tree path]
@@ -61,7 +59,7 @@
    {:style (merge
             style/button
             {:background-color (hsl 120 60 80), :padding "0 8px", :margin "0px"}),
-    :on-click (action-> :session/focus path)}
+    :on-click (fn [e d!] (d! :session/focus path))}
    (<> "space")))
 
 (defn render-text [tree path]
@@ -72,7 +70,7 @@
              :padding "0 8px",
              :margin "0px 0px",
              :color (hsl 0 0 40)}),
-    :on-click (action-> :session/focus path)}
+    :on-click (fn [e d!] (d! :session/focus path))}
    (<> (str "<>" (:content tree)))))
 
 (defn render-element [tree focus focuses path]
