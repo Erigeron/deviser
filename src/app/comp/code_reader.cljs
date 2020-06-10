@@ -2,7 +2,7 @@
 (ns app.comp.code-reader
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> list-> <> div button textarea span]]
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]
             [app.style :as style]))
 
 (defcomp

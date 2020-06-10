@@ -2,11 +2,10 @@
 (ns app.comp.header
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo-ui.colors :as colors]
             [respo.core :refer [defcomp <> span div]]
             [respo.comp.space :refer [=<]]
-            [respo-ui.comp.icon :refer [comp-icon]]
-            [app.style :as style]))
+            [app.style :as style]
+            [feather.core :refer [comp-i]]))
 
 (defn on-home [e dispatch!]
   (dispatch! :router/change {:name :home, :data nil, :router nil}))
@@ -27,18 +26,20 @@
    {:style ui/column-parted}
    (div
     {:on-click on-home, :style (merge style/icon {:cursor :pointer})}
-    (comp-icon :settings))
+    (comp-i :settings 14 (hsl 200 80 70)))
    (=< nil 8)
    (div
     {:style (merge style/icon),
      :on-click (fn [e d! m!] (d! :router/change {:name :code, :data nil, :router nil}))}
-    (comp-icon :quote))
+    (comp-i :code 14 (hsl 200 80 70)))
    (=< nil 8)
    (div
     {:style (merge style/icon {:color (hsl 240 100 76)}),
      :on-click (fn [e d! m!] (.open js/window (str js/location.href "?page=preview")))}
-    (comp-icon :ios-eye)))
+    (comp-i :eye 14 (hsl 200 80 70))))
   (div
    {:style ui/column}
    (div {:style (merge ui/center {:font-size 16, :font-family ui/font-fancy})} (<> count))
-   (div {:style (merge style/icon), :on-click on-profile} (comp-icon :android-contact)))))
+   (div
+    {:style (merge style/icon), :on-click on-profile}
+    (comp-i :message-square 14 (hsl 200 80 70))))))

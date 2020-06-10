@@ -2,11 +2,9 @@
 (ns app.comp.kind-tabs
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core
-             :refer
-             [defcomp cursor-> list-> <> div button textarea span mutation->]]
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
-            [respo-ui.comp.icon :refer [comp-icon]]))
+            [feather.core :refer [comp-i]]))
 
 (defcomp
  comp-kind-tabs
@@ -17,15 +15,17 @@
   (=< 8 nil)
   (if has-children?
     (div {:style {}} (<> "box"))
-    (let [state (or (:data states) {:show-menu? false})
+    (let [cursor (:cursor states)
+          state (or (:data states) {:show-menu? false})
           node-types (list :box :text :icon :space)]
       (div
        {:style {:position :relative}}
        (div
-        {:on-click (mutation-> (update state :show-menu? not)), :style {:cursor :pointer}}
+        {:on-click (fn [e d!] (d! cursor (update state :show-menu? not))),
+         :style {:cursor :pointer}}
         (<> (name kind))
         (=< 8 nil)
-        (comp-icon :android-arrow-dropdown))
+        (comp-i :chevron-down 14 (hsl 200 80 70)))
        (if (:show-menu? state)
          (list->
           :div

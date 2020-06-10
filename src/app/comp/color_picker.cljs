@@ -2,7 +2,7 @@
 (ns app.comp.color-picker
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> list-> <> div button textarea span]]))
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]))
 
 (def default-colors
   {:theme ["red" "green" "blue" "black" "white"],
@@ -13,7 +13,7 @@
 (defcomp
  comp-color-picker
  (states color on-pick)
- (let [state (or (:data states) {:category :theme, :popup? false})]
+ (let [cursor (:cursor states), state (or (:data states) {:category :theme, :popup? false})]
    (div
     {:style {:position :relative, :display :inline-block, :cursor :pointer}}
     (div

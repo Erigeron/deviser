@@ -2,7 +2,7 @@
 (ns app.comp.box-inspector
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> list-> <> div button textarea span]]
+            [respo.core :refer [defcomp >> list-> <> div button textarea span]]
             [app.style :as style]
             [app.comp.color-picker :refer [comp-color-picker]]))
 
@@ -33,9 +33,7 @@
    (div
     {}
     (<> "background-color: ")
-    (cursor->
-     :color-picker
-     comp-color-picker
-     states
+    (comp-color-picker
+     (>> states :color-picker)
      color
      (fn [new-color d!] (d! :element/change-style [:background-color new-color])))))))

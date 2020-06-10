@@ -2,7 +2,7 @@
 (ns app.comp.home
   (:require [hsl.core :refer [hsl]]
             [respo-ui.core :as ui]
-            [respo.core :refer [defcomp cursor-> <> div button textarea span]]
+            [respo.core :refer [defcomp >> <> div button textarea span]]
             [respo.comp.space :refer [=<]]
             [app.comp.layer-tree :refer [comp-layer-tree]]
             [app.comp.inspector :refer [comp-inspector]]
