@@ -26,7 +26,7 @@
                       style/button
                       (if (= current-layout layout)
                         {:background-color (hsl 200 80 70), :color :white})),
-              :on-click (fn [e d! m!] (d! :element/layout layout))}
+              :on-click (fn [e d!] (d! :element/layout layout))}
              (<> (name layout)))]))))
   (div
    {}

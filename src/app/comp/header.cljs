@@ -30,12 +30,12 @@
    (=< nil 8)
    (div
     {:style (merge style/icon),
-     :on-click (fn [e d! m!] (d! :router/change {:name :code, :data nil, :router nil}))}
+     :on-click (fn [e d!] (d! :router/change {:name :code, :data nil, :router nil}))}
     (comp-i :code 14 (hsl 200 80 70)))
    (=< nil 8)
    (div
     {:style (merge style/icon {:color (hsl 240 100 76)}),
-     :on-click (fn [e d! m!] (.open js/window (str js/location.href "?page=preview")))}
+     :on-click (fn [e d!] (.open js/window (str js/location.href "?page=preview")))}
     (comp-i :eye 14 (hsl 200 80 70))))
   (div
    {:style ui/column}

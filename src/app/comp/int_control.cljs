@@ -14,10 +14,10 @@
   (button
    {:style style/button,
     :inner-text "+",
-    :on-click (fn [e d! m!] (on-set-int (if (number? x) (+ x step) step) d!))})
+    :on-click (fn [e d!] (on-set-int (if (number? x) (+ x step) step) d!))})
   (button
    {:style style/button,
     :inner-text "-",
-    :on-click (fn [e d! m!] (on-set-int (if (number? x) (- x step) step) d!))})
+    :on-click (fn [e d!] (on-set-int (if (number? x) (- x step) step) d!))})
   (button
-   {:style style/button, :inner-text "clear", :on-click (fn [e d! m!] (on-set-int nil d!))})))
+   {:style style/button, :inner-text "clear", :on-click (fn [e d!] (on-set-int nil d!))})))
