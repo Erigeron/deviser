@@ -19,7 +19,7 @@
             :background-color (hsl 200 80 90),
             :color :white,
             :padding "0 8px"},
-    :on-click (fn [e d! m!]
+    :on-click (fn [e d!]
       (d! :user/log-out nil)
       (.removeItem js/localStorage (:storage-key config/site)))}
    (<> "Log out"))))

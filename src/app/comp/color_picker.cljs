@@ -24,7 +24,7 @@
               :font-family "Menlo,monospace",
               :color :white,
               :font-size 12},
-      :on-click (fn [e d! m!] (m! (update state :popup? not)))})
+      :on-click (fn [e d!] (d! cursor (update state :popup? not)))})
     (if (:popup? state)
       (div
        {:style {:position :absolute,
@@ -47,7 +47,7 @@
                             :border-color "#eee"}
                            (if (= category (:category state))
                              {:border-color (hsl 200 80 70)})),
-                   :on-click (fn [e d! m!] (m! (assoc state :category category)))}
+                   :on-click (fn [e d!] (d! cursor (assoc state :category category)))}
                   (<> (name category)))]))))
        (list->
         {}
@@ -62,4 +62,4 @@
                            :margin 8,
                            :display :inline-block,
                            :cursor :pointer},
-                   :on-click (fn [e d! m!] (println "pick" item) (on-pick item d!))})])))))))))
+                   :on-click (fn [e d!] (println "pick" item) (on-pick item d!))})])))))))))

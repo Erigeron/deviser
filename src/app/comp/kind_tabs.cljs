@@ -45,5 +45,5 @@
                              ui/flex
                              {:cursor :pointer, :padding "0 8px", :color (hsl 0 0 70)}
                              (if (= x kind) {:color (hsl 0 0 30)})),
-                     :on-click (fn [e d! m!] (d! :element/set-kind x))}
+                     :on-click (fn [e d!] (d! :element/set-kind x))}
                     (<> (name x)))]))))))))))

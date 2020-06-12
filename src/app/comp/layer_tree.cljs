@@ -18,7 +18,7 @@
              :min-width 40,
              :color (hsl 240 60 70),
              :padding "0 4px"}),
-    :on-click (fn [e d! m!] (d! action nil))}
+    :on-click (fn [e d!] (d! action nil))}
    (<> guide)))
 
 (defcomp

@@ -50,5 +50,5 @@
         (comp-messages
          (get-in store [:session :messages])
          {}
-         (fn [info d! m!] (d! :session/remove-message info)))
+         (fn [info d!] (d! :session/remove-message info)))
         (when dev? (comp-reel (:reel-length store) {:bottom 0})))))))

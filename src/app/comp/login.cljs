@@ -8,7 +8,7 @@
 
 (def initial-state {:username "", :password ""})
 
-(defn on-input [state k] (fn [e dispatch! mutate!] (mutate! (assoc state k (:value e)))))
+(defn on-input [state cursor k] (fn [e d!] (d! cursor (assoc state k (:value e)))))
 
 (defn on-submit [username password signup?]
   (fn [e dispatch!]
@@ -18,7 +18,7 @@
 (defcomp
  comp-login
  (states)
- (let [state (or (:data states) initial-state)]
+ (let [cursor (:cursor states), state (or (:data states) initial-state)]
    (div
     {}
     (div
@@ -29,7 +29,7 @@
        {:placeholder "Username",
         :value (:username state),
         :style ui/input,
-        :on-input (on-input state :username)})))
+        :on-input (on-input state cursor :username)})))
     (=< nil 8)
     (div
      {:style ui/flex}

@@ -30,10 +30,10 @@
               :text "Edit style:",
               :initial v,
               :style {:display :block}}
-             (fn [result d! m!] (d! :element/styles (assoc styles k result))))]))))
+             (fn [result d!] (d! :element/styles (assoc styles k result))))]))))
   (comp-prompt
    (>> states :add)
    {:trigger (button {:style style/button, :inner-text "Set"}),
     :text "New styles in `property:value`:",
     :style {:display :block}}
-   (fn [result d! m!] (d! :element/styles (parse-styles result styles))))))
+   (fn [result d!] (d! :element/styles (parse-styles result styles))))))

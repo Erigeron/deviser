@@ -28,7 +28,7 @@
   (span
    {:style (if focused? style-focused),
     :inner-text "this is an icon",
-    :on-click (fn [e d! m!] (d! :focus path))}))
+    :on-click (fn [e d!] (d! :focus path))}))
 
 (defn render-space [element path focused?]
   (span
@@ -36,7 +36,7 @@
             {:min-width 1, :min-height 1}
             (:styles element)
             (if focused? style-focused)),
-    :on-click (fn [e d! m!] (d! :focus path))}))
+    :on-click (fn [e d!] (d! :focus path))}))
 
 (defn render-text [tree path focused?]
   (span
@@ -45,7 +45,7 @@
             (:styles tree)
             (if focused? style-focused)),
     :inner-text (:content tree),
-    :on-click (fn [e d! m!] (d! :focus path))}))
+    :on-click (fn [e d!] (d! :focus path))}))
 
 (defn render-tree [tree focus path]
   (case (:kind tree)
@@ -71,7 +71,7 @@
             (expand-presets (:presets tree))
             (:styles tree)
             (if (= focus path) style-focused)),
-    :on-click (fn [e d! m!] (println "Touch on path:" path))}
+    :on-click (fn [e d!] (println "Touch on path:" path))}
    (->> (:children tree)
         (map (fn [[k v]] [k (render-tree v focus (conj path k))]))
         (sort-by first))))
